@@ -7,7 +7,7 @@
 
 using namespace std;
 
-class TimeException : public exception{
+class TimeException : exception{
 	string msg;
 public:
 	TimeException(const string& msg) : msg(msg) {};

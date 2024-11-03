@@ -6,7 +6,7 @@
 
 using namespace std;
 
-class ParticipantException : public exception {
+class ParticipantException : exception {
 	string msg;
 public:
 	ParticipantException(const string& msg) : msg(msg) {};
