@@ -2,6 +2,7 @@
 #include <iostream>
 #include <fstream>
 #include <string>
+#include <any>
 #include "Participant.h"
 #include "Time.h"
 
@@ -14,6 +15,7 @@ public:
 	Result(Participant& participant) : 
 		participant(participant) {};
 	virtual void display() = 0;
+	virtual any getResult() = 0;
 };
 
 class TimeResult : public Result {
@@ -24,6 +26,7 @@ public:
 	void display() override {
 		cout << participant << "result: " << time << endl;
 	}
+	any getResult() override { return time; }
 };
 
 class ScoreResult : public Result {
@@ -34,6 +37,7 @@ public:
 	void display() override {
 		cout << participant << "result: " << score << endl;
 	}
+	any getResult() override { return score; }
 };
 
 class TextResult : public Result {
@@ -44,4 +48,5 @@ public:
 	void display() override {
 		cout << participant << "result: " << text << endl;
 	}
+	any getResult() override { return text; }
 };
