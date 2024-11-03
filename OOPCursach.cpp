@@ -1,6 +1,5 @@
 ﻿#include <iostream>
 #include <fstream>
-#include "Participant.h"
 
 using namespace std;
 
