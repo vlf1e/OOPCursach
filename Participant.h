@@ -2,8 +2,18 @@
 #include <iostream>
 #include <fstream>
 #include <string>
+#include <exception>
 
 using namespace std;
+
+class ParticipantException : public exception {
+	string msg;
+public:
+	ParticipantException(const string& msg) : msg(msg) {};
+	virtual const char* what() const noexcept override {
+		return msg.c_str();
+	}
+};
 
 class Participant {
 	string secondName, firstName, surname, country;
@@ -11,7 +21,10 @@ class Participant {
 public:
 	Participant(const string& secondName, const string& firstName,
 		const string& surname, const string& country, const int& age) :
-		secondName(secondName), firstName(firstName), surname(surname), country(country), age(age) {};
+		secondName(secondName), firstName(firstName), surname(surname), country(country) {
+		if (age > 100) throw ParticipantException("¬озраст участника не может быть больше 100 лет!\n");
+		this->age = age;
+	};
 	const string getSecondName() { return secondName; }
 	const string getFirstName() { return firstName; }
 	const string getSurname() { return surname; }
