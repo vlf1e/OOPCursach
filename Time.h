@@ -45,4 +45,9 @@ public:
 		o << t.minutes << ':' << t.seconds << ':' << t.milliseconds << endl;
 		return o;
 	}
+	friend bool operator>(Time t1, Time t2) {
+		if (t1.minutes != t2.minutes) return t1.minutes > t2.minutes;
+		if (t1.seconds != t2.seconds) return t1.seconds > t2.seconds;
+		return t1.milliseconds > t2.milliseconds;
+	}
 };

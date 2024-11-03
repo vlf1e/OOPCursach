@@ -131,6 +131,8 @@
     <ClCompile Include="OOPCursach.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Competition.h" />
+    <ClInclude Include="JudgeSystem.h" />
     <ClInclude Include="Participant.h" />
     <ClInclude Include="Result.h" />
     <ClInclude Include="Time.h" />
