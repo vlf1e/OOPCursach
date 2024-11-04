@@ -141,8 +141,17 @@ void display(const vector<shared_ptr<Competition>>& competitions) {
 	string name;
 	cout << "Введите имя соревнования, которое необходимо вывести на экран: ";
 	cin >> name;
+	cout << string(120, '-') << endl;
 	for (const auto& comp : competitions) {
 		if (comp->getName() == name) {
+			cout << "Соревнование: " << name << endl;
+			cout << "| " << setw(22) << "Фамилия"
+				<< " | " << setw(15) << "Имя"
+				<< " | " << setw(18) << "Отчество"
+				<< " | " << setw(16) << "Страна"
+				<< " | " << setw(10) << "Возраст"
+				<< " | " << setw(20) << "Результат"
+				<< " |" << endl;
 			comp->display();
 			return;
 		}

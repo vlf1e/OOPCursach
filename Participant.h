@@ -1,6 +1,7 @@
 #pragma once
 #include <iostream>
 #include <fstream>
+#include <iomanip>
 #include <string>
 #include <exception>
 
@@ -36,8 +37,12 @@ public:
 	void setCountry(const string& country) { this->country = country; }
 	void setAge(const int& age) { this->age; }
 	friend ostream& operator<<(ostream& o, const Participant& p) {
-		o << p.secondName << ' ' << p.firstName << ' ' 
-			<< p.surname << ' ' << p.age << ' ' << p.country << endl;
+		o << "| " << setw(22) << p.secondName
+			<< " | " << setw(15) << p.firstName
+			<< " | " << setw(18) << p.surname
+			<< " | " << setw(16) << p.country
+			<< " | " << setw(10) << p.age
+			<< " |";
 		return o;
 	}
 };
