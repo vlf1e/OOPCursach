@@ -37,7 +37,8 @@ public:
 		return i;
 	}
 	friend ostream& operator<<(ostream& o, const Time& t) {
-		o << t.minutes << ':' << t.seconds << ':' << t.milliseconds;
+		string time = to_string(t.minutes) + ':' + to_string(t.seconds) + ':' + to_string(t.milliseconds);
+		o << time;
 		return o;
 	}
 	friend ifstream& operator>>(ifstream& i, Time& t) {

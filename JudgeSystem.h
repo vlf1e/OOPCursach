@@ -72,63 +72,42 @@ void addResult(vector<shared_ptr<Competition>>& competitions) {
 			cout << "Введите возраст: ";
 			cin >> age;
 			Participant participant(secondName, firstName, surname, country, age);
-			cout << "Какой тип результата?" << endl;
-			cout << "1. Время" << endl;
-			cout << "2. Очки" << endl;
-			cout << "3. Текст" << endl;
-			int switch_on;
-			cout << "Ваш выбор: ";
-			cin >> switch_on;
-			switch (switch_on) {
-			case 1: {
-				if (typeid(*competition) == typeid(TimeCompetition)) {
-					cout << "Введите время (формат времени: минуты:секунды:миллисекунды): ";
-					Time time;
-					try
-					{
-						cin >> time;
-					}
-					catch (const TimeException& e)
-					{
-						cerr << e.what() << endl;
-					}
-					
-					shared_ptr<Result> ptr = make_shared<TimeResult>(participant, time);
-					competition->addParticipant(ptr);
-					cout << "Результат добавлен!" << endl;
+			if (typeid(*competition) == typeid(TimeCompetition)) {
+				cout << "Введите время (формат времени: минуты:секунды:миллисекунды): ";
+				Time time;
+				try
+				{
+					cin >> time;
 				}
-				else cout << "Неверный тип" << endl;
-				break;
-			}
-			case 2: {
-				if (typeid(*competition) == typeid(ScoreCompetition)) {
-					cout << "Введите очки: ";
-					double score;
-					cin >> score;
-					shared_ptr<Result> ptr = make_shared<ScoreResult>(participant, score);
-					competition->addParticipant(ptr);
-					cout << "Результат добавлен!" << endl;
+				catch (const TimeException& e)
+				{
+					cerr << e.what() << endl;
 				}
-				else cout << "Неверный тип" << endl;
-				break;
+
+				shared_ptr<Result> ptr = make_shared<TimeResult>(participant, time);
+				competition->addParticipant(ptr);
+				cout << "Результат добавлен!" << endl;
+				return;
 			}
-			case 3: {
-				if (typeid(*competition) == typeid(TextCompetition)) {
-					cout << "Введите вашу оценку: ";
-					string text;
-					cin >> text;
-					shared_ptr<Result> ptr = make_shared<TextResult>(participant, text);
-					competition->addParticipant(ptr);
-					cout << "Результат добавлен!" << endl;
-				}
-				else cout << "Неверный тип" << endl;
-				break;
+			if (typeid(*competition) == typeid(ScoreCompetition)) {
+				cout << "Введите очки: ";
+				double score;
+				cin >> score;
+				shared_ptr<Result> ptr = make_shared<ScoreResult>(participant, score);
+				competition->addParticipant(ptr);
+				cout << "Результат добавлен!" << endl;
+				return;
 			}
-			default:
-				cout << "Ошибка ввода!" << endl;
-				break;
+			if (typeid(*competition) == typeid(TextCompetition)) {
+				cout << "Введите вашу оценку: ";
+				string text;
+				cin.ignore();
+				getline(cin, text);
+				shared_ptr<Result> ptr = make_shared<TextResult>(participant, text);
+				competition->addParticipant(ptr);
+				cout << "Результат добавлен!" << endl;
+				return;
 			}
-			return;
 		}
 	}
 	cout << "Соревнование не найдено!" << endl;
@@ -141,17 +120,18 @@ void display(const vector<shared_ptr<Competition>>& competitions) {
 	string name;
 	cout << "Введите имя соревнования, которое необходимо вывести на экран: ";
 	cin >> name;
-	cout << string(120, '-') << endl;
 	for (const auto& comp : competitions) {
 		if (comp->getName() == name) {
 			cout << "Соревнование: " << name << endl;
-			cout << "| " << setw(22) << "Фамилия"
-				<< " | " << setw(15) << "Имя"
-				<< " | " << setw(18) << "Отчество"
-				<< " | " << setw(16) << "Страна"
-				<< " | " << setw(10) << "Возраст"
-				<< " | " << setw(20) << "Результат"
+			cout << string(120, '-');
+			cout << "| " << setw(22) << left << "Фамилия"
+				<< " | " << setw(15) << left << "Имя"
+				<< " | " << setw(18) << left << "Отчество"
+				<< " | " << setw(16) << left << "Страна"
+				<< " | " << setw(10) << left << "Возраст"
+				<< " | " << setw(20) << left << "Результат"
 				<< " |" << endl;
+			cout << string(120, '-');
 			comp->display();
 			return;
 		}
@@ -176,8 +156,6 @@ void JudgeSystem() {
 			display(competitions);
 			break;
 		case 4:
-			// Реализация для вывода в файл
-			cout << "Эта функция еще не реализована." << endl;
 			break;
 		case 0:
 			cout << "Выход из программы." << endl;

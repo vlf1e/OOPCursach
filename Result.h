@@ -6,6 +6,7 @@
 #include <any>
 #include "Participant.h"
 #include "Time.h"
+#include "LineWrapping.h"
 
 using namespace std;
 
@@ -30,7 +31,8 @@ public:
 	TimeResult(Participant& participant, Time& time) :
 		time(time), Result(participant) {};
 	void display() override {
-		cout << participant << setw(15) << time << " |" << endl;
+		cout << participant << setw(20) << time << " |";
+		cout << string(120, '-');
 	}
 	any getResult() override { return time; }
 	friend bool operator>(TimeResult& t1, TimeResult& t2) {
@@ -44,7 +46,8 @@ public:
 	ScoreResult(Participant& participant, double& score) :
 		score(score), Result(participant) {};
 	void display() override {
-		cout << participant << setw(15) << score << " |" << endl;
+		cout << participant << setw(20) << score << " |" << endl;
+		cout << string(120, '-');
 	}
 	any getResult() override { return score; }
 	friend bool operator>(ScoreResult& s1, ScoreResult s2) {
@@ -58,7 +61,8 @@ public:
 	TextResult(Participant& participant, const string& text) :
 		text(text), Result(participant) {};
 	void display() override {
-		cout << participant << setw(15) << text << " |" << endl;
+		cout << participant << lineWrapping(text);
+		cout << string(120, '-');
 	}
 	any getResult() override { return text; }
 	friend bool operator>(TextResult t1, TextResult t2) {

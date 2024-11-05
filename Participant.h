@@ -37,12 +37,12 @@ public:
 	void setCountry(const string& country) { this->country = country; }
 	void setAge(const int& age) { this->age; }
 	friend ostream& operator<<(ostream& o, const Participant& p) {
-		o << "| " << setw(22) << p.secondName
-			<< " | " << setw(15) << p.firstName
-			<< " | " << setw(18) << p.surname
-			<< " | " << setw(16) << p.country
-			<< " | " << setw(10) << p.age
-			<< " |";
+		o << "| " << setw(22) << left << p.secondName
+			<< " | " << setw(15) << left << p.firstName
+			<< " | " << setw(18) << left << p.surname
+			<< " | " << setw(16) << left << p.country
+			<< " | " << setw(10) << left << p.age
+			<< " | ";
 		return o;
 	}
 };

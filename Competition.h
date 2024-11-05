@@ -47,7 +47,6 @@ public:
 
 	void display() override {
 		for (const auto& res : results) {
-			cout << string(120, '-') << endl;
 			res->display();
 		}
 	}
