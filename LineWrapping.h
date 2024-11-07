@@ -6,11 +6,15 @@
 using namespace std;
 
 const string lineWrapping(const string str) {
-	if (str.size() < 23) return str;
-	bool flag = false;
-	string output = "", word, line = "",  newstr = '|' + string(24, ' ') + '|' + string(17, ' ') + '|' 
-		+ string(20, ' ') + '|' + string(18, ' ') + '|' + string(12, ' ') + "| ";
+	string output = "", word, line = "",
+		newstr = '|' + string(7, ' ') + '|' + string(19, ' ') + '|' + string(17, ' ') + '|' + string(17, ' ') +
+		'|' + string(18, ' ') + '|' + string(12, ' ') + "| ";
 	stringstream stream(str);
+	if (str.size() < 23) {
+		line = str + string(21 - str.size(), ' ') + '|';
+		return line;
+	}
+	bool flag = false;
 	while (stream >> word) {
 		if (line.size() + word.size() < 23) {
 			line += word;

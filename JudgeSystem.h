@@ -122,23 +122,54 @@ void display(const vector<shared_ptr<Competition>>& competitions) {
 	cin >> name;
 	for (const auto& comp : competitions) {
 		if (comp->getName() == name) {
+			//int i = 0;
 			cout << "Соревнование: " << name << endl;
 			cout << string(120, '-');
-			cout << "| " << setw(22) << left << "Фамилия"
+			cout << "| " << setw(5) << left << "Место"
+				<< " | " << setw(17) << left << "Фамилия"
 				<< " | " << setw(15) << left << "Имя"
-				<< " | " << setw(18) << left << "Отчество"
+				<< " | " << setw(15) << left << "Отчество"
 				<< " | " << setw(16) << left << "Страна"
 				<< " | " << setw(10) << left << "Возраст"
 				<< " | " << setw(20) << left << "Результат"
 				<< " |" << endl;
 			cout << string(120, '-');
+			//cout << "| " << setw(6) << left << i;
 			comp->display();
 			return;
 		}
 	}
 	cout << "Соревнование не найдено!" << endl;
 }
-
+void outputToFile(vector<shared_ptr<Competition>>& competitions) {
+	for (const auto& comp : competitions) {
+		cout << comp->getName() << endl;
+	}
+	string name;
+	cout << "Введите имя соревнования, которое необходимо вывести на экран: ";
+	cin >> name;
+	ofstream file("Отчёт.txt");
+	for (const auto& comp : competitions) {
+		int i = 1;
+		if (comp->getName() == name) {
+			file << "Соревнование: " << name << endl;
+			file << string(120, '-') << endl;
+			file << "| " << setw(5) << left << "Место"
+				<< " | " << setw(17) << left << "Фамилия"
+				<< " | " << setw(15) << left << "Имя"
+				<< " | " << setw(15) << left << "Отчество"
+				<< " | " << setw(16) << left << "Страна"
+				<< " | " << setw(10) << left << "Возраст"
+				<< " | " << setw(20) << left << "Результат"
+				<< " |" << endl;
+			file << string(120, '-') << endl;
+			file << "| " << setw(6) << left << i;
+			comp->outputToFile(file);
+			file.close();
+			return;
+		}
+	}
+}
 void JudgeSystem() {
 	vector<shared_ptr<Competition>> competitions;
 	while (true) {
@@ -156,6 +187,7 @@ void JudgeSystem() {
 			display(competitions);
 			break;
 		case 4:
+			outputToFile(competitions);
 			break;
 		case 0:
 			cout << "Выход из программы." << endl;

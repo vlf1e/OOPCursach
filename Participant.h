@@ -37,9 +37,9 @@ public:
 	void setCountry(const string& country) { this->country = country; }
 	void setAge(const int& age) { this->age; }
 	friend ostream& operator<<(ostream& o, const Participant& p) {
-		o << "| " << setw(22) << left << p.secondName
+		o << "| " << setw(17) << left << p.secondName
 			<< " | " << setw(15) << left << p.firstName
-			<< " | " << setw(18) << left << p.surname
+			<< " | " << setw(15) << left << p.surname
 			<< " | " << setw(16) << left << p.country
 			<< " | " << setw(10) << left << p.age
 			<< " | ";
