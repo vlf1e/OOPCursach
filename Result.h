@@ -43,6 +43,9 @@ public:
 	friend bool operator>(TimeResult& t1, TimeResult& t2) {
 		return t1.time > t2.time;
 	}
+	friend bool operator<(TimeResult& t1, TimeResult& t2) {
+		return t1.time < t2.time;
+	}
 };
 
 class ScoreResult : public Result {
@@ -61,6 +64,9 @@ public:
 	any getResult() override { return score; }
 	friend bool operator>(ScoreResult& s1, ScoreResult s2) {
 		return s1.score > s2.score;
+	}
+	friend bool operator<(ScoreResult& s1, ScoreResult s2) {
+		return s1.score < s2.score;
 	}
 };
 

@@ -11,7 +11,6 @@
 using namespace std;
 
 void ShowMenu() {
-	//system("cls");
 	cout << "1. Добавить соревнование" << endl;
 	cout << "2. Зарегистрировать результат" << endl;
 	cout << "3. Посмотреть итоги соревнований" << endl;
@@ -152,6 +151,7 @@ void outputToFile(vector<shared_ptr<Competition>>& competitions) {
 	for (const auto& comp : competitions) {
 		int i = 1;
 		if (comp->getName() == name) {
+			if (typeid(*comp) != typeid(TextCompetition)) comp->sortParticipantsByScore();
 			file << "Соревнование: " << name << endl;
 			file << string(120, '-') << endl;
 			file << "| " << setw(5) << left << "Место"
@@ -163,7 +163,7 @@ void outputToFile(vector<shared_ptr<Competition>>& competitions) {
 				<< " | " << setw(20) << left << "Результат"
 				<< " |" << endl;
 			file << string(120, '-') << endl;
-			file << "| " << setw(6) << left << i;
+			//file << "| " << setw(6) << left << i;
 			comp->outputToFile(file);
 			file.close();
 			return;

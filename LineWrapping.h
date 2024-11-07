@@ -34,5 +34,3 @@ const string lineWrapping(const string str) {
 	output += line;
 	return output;
 }
-
-/**/

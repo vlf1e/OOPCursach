@@ -39,14 +39,14 @@ public:
 	void sortParticipantsByScore() override {
 		sort(results.begin(), results.end(),
 			[](const shared_ptr<TimeResult>& r1, const shared_ptr<TimeResult>& r2) {
-				return r1 > r2;
+				return !(r1 > r2);
 			});
 	}
 	void display() override {
 		int i = 1;
 		for (const auto& res : results) {
-			i++;
 			cout << "| " << setw(6) << left << i;
+			i++;
 			res->display();
 		}
 	}
@@ -84,14 +84,14 @@ public:
 	void sortParticipantsByScore() override {
 		sort(results.begin(), results.end(),
 			[](const shared_ptr<ScoreResult>& r1, const shared_ptr<ScoreResult>& r2) {
-				return r1 > r2;
+				return !(r1 > r2);
 			});
 	}
 	void display() override {
 		int i = 1;
 		for (const auto& res : results) {
-			i++;
 			cout << "| " << setw(6) << left << i;
+			i++;
 			res->display();
 		}
 	}
