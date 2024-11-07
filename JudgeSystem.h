@@ -11,6 +11,7 @@
 using namespace std;
 
 void ShowMenu() {
+	system("cls");
 	cout << "1. Добавить соревнование" << endl;
 	cout << "2. Зарегистрировать результат" << endl;
 	cout << "3. Посмотреть итоги соревнований" << endl;
@@ -24,12 +25,22 @@ void addCompetition(vector<shared_ptr<Competition>>& competitions) {
 	system("cls");
 	cout << "Введите имя соревнования: ";
 	cin >> name;
+	if (cin.fail()) {
+		cout << "Ошибка ввода!" << endl;
+		cin.clear();
+		return;
+	}
 	int type;
 	cout << "Выберите тип оценивания соревнования:" << endl;
 	cout << "1. Время" << endl;
 	cout << "2. Очки" << endl;
 	cout << "3. Текст" << endl;
 	cin >> type;
+	if (cin.fail()) {
+		cout << "Ошибка ввода!" << endl;
+		cin.clear();
+		return;
+	}
 	shared_ptr<Competition> competition;
 	switch (type) {
 	case 1:
@@ -56,6 +67,11 @@ void addResult(vector<shared_ptr<Competition>>& competitions) {
 	string name;
 	cout << "Введите имя соревнования, в которое необходимо добавить результат: ";
 	cin >> name;
+	if (cin.fail()) {
+		cout << "Ошибка ввода!" << endl;
+		cin.clear();
+		return;
+	}
 	for (const auto& competition : competitions) {
 		if (name == competition->getName()) {
 			string secondName, firstName, surname, country;
@@ -70,6 +86,11 @@ void addResult(vector<shared_ptr<Competition>>& competitions) {
 			cin >> country;
 			cout << "Введите возраст: ";
 			cin >> age;
+			if (cin.fail()) {
+				cout << "Ошибка ввода!" << endl;
+				cin.clear();
+				return;
+			}
 			Participant participant(secondName, firstName, surname, country, age);
 			if (typeid(*competition) == typeid(TimeCompetition)) {
 				cout << "Введите время (формат времени: минуты:секунды:миллисекунды): ";
@@ -92,6 +113,11 @@ void addResult(vector<shared_ptr<Competition>>& competitions) {
 				cout << "Введите очки: ";
 				double score;
 				cin >> score;
+				if (cin.fail()) {
+					cout << "Ошибка ввода!" << endl;
+					cin.clear();
+					return;
+				}
 				shared_ptr<Result> ptr = make_shared<ScoreResult>(participant, score);
 				competition->addParticipant(ptr);
 				cout << "Результат добавлен!" << endl;
@@ -102,6 +128,11 @@ void addResult(vector<shared_ptr<Competition>>& competitions) {
 				string text;
 				cin.ignore();
 				getline(cin, text);
+				if (cin.fail()) {
+					cout << "Input failed!" << endl;
+					cin.clear();
+					return;
+				}
 				shared_ptr<Result> ptr = make_shared<TextResult>(participant, text);
 				competition->addParticipant(ptr);
 				cout << "Результат добавлен!" << endl;
@@ -119,9 +150,14 @@ void display(const vector<shared_ptr<Competition>>& competitions) {
 	string name;
 	cout << "Введите имя соревнования, которое необходимо вывести на экран: ";
 	cin >> name;
+	if (cin.fail()) {
+		cout << "Input failed!" << endl;
+		cin.clear();
+		return;
+	}
 	for (const auto& comp : competitions) {
 		if (comp->getName() == name) {
-			//int i = 0;
+			if (typeid(*comp) != typeid(TextCompetition)) comp->sortParticipantsByScore();
 			cout << "Соревнование: " << name << endl;
 			cout << string(120, '-');
 			cout << "| " << setw(5) << left << "Место"
@@ -133,7 +169,6 @@ void display(const vector<shared_ptr<Competition>>& competitions) {
 				<< " | " << setw(20) << left << "Результат"
 				<< " |" << endl;
 			cout << string(120, '-');
-			//cout << "| " << setw(6) << left << i;
 			comp->display();
 			return;
 		}
@@ -147,6 +182,11 @@ void outputToFile(vector<shared_ptr<Competition>>& competitions) {
 	string name;
 	cout << "Введите имя соревнования, которое необходимо вывести на экран: ";
 	cin >> name;
+	if (cin.fail()) {
+		cout << "Input failed!" << endl;
+		cin.clear();
+		return;
+	}
 	ofstream file("Отчёт.txt");
 	for (const auto& comp : competitions) {
 		int i = 1;
@@ -163,7 +203,6 @@ void outputToFile(vector<shared_ptr<Competition>>& competitions) {
 				<< " | " << setw(20) << left << "Результат"
 				<< " |" << endl;
 			file << string(120, '-') << endl;
-			//file << "| " << setw(6) << left << i;
 			comp->outputToFile(file);
 			file.close();
 			return;
@@ -176,6 +215,12 @@ void JudgeSystem() {
 		ShowMenu();
 		int choice;
 		cin >> choice;
+		if (cin.fail()) {
+			cin.clear();
+			cin.ignore(100000000, '\n');
+			cout << "Ошибка ввода!" << endl;
+			continue;
+		}
 		switch (choice) {
 		case 1:
 			addCompetition(competitions);
@@ -190,8 +235,10 @@ void JudgeSystem() {
 			outputToFile(competitions);
 			break;
 		case 0:
+			system("cls");
 			cout << "Выход из программы." << endl;
 			return;
+			break;
 		default:
 			cout << "Неверный выбор!" << endl;
 			break;

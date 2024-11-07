@@ -1,5 +1,4 @@
 ﻿#include "JudgeSystem.h"
-#include "LineWrapping.h"
 #include <iostream>
 #include <string>
 
