@@ -101,7 +101,7 @@ void viewUsers() {
 		<< " | " << setw(20) << left << "Роль" << " |" << endl;
 	cout << string(47, '-') << endl;
 	for (const auto& usr : users) {
-		cout << "| " << setw(20) << usr->getLogin() 
+		cout << "| " << setw(20) << usr->getLogin()
 			<< " | " << setw(20) << usr->getType() << " |" << endl;
 		cout << string(47, '-') << endl;
 	}
@@ -113,6 +113,96 @@ void viewUsers() {
 		}
 	}
 	file.close();
+}
+
+void viewAdmins() {
+	system("cls");
+	ifstream file("Users.txt");
+	vector<unique_ptr<User>> users;
+	User user;
+	while (file >> user) {
+		users.push_back(make_unique<User>(user));
+	}
+	cout << "| " << setw(20) << left << "Логин"
+		<< " | " << setw(20) << left << "Роль" << " |" << endl;
+	cout << string(47, '-') << endl;
+	for (const auto& usr : users) {
+		if (usr->getType() == "Администратор") {
+			cout << "| " << setw(20) << usr->getLogin()
+				<< " | " << setw(20) << usr->getType() << " |" << endl;
+			cout << string(47, '-') << endl;
+		}
+	}
+	cout << "Нажмите любую кнопку, чтобы продолжить" << endl;
+	while (true) {
+		if (_kbhit()) {
+			while (_kbhit()) _getch();
+			break;
+		}
+	}
+	file.close();
+}
+
+void viewJudges() {
+	system("cls");
+	ifstream file("Users.txt");
+	vector<unique_ptr<User>> users;
+	User user;
+	while (file >> user) {
+		users.push_back(make_unique<User>(user));
+	}
+	cout << "| " << setw(20) << left << "Логин"
+		<< " | " << setw(20) << left << "Роль" << " |" << endl;
+	cout << string(47, '-') << endl;
+	for (const auto& usr : users) {
+		if (usr->getType() == "Судья") {
+			cout << "| " << setw(20) << usr->getLogin()
+				<< " | " << setw(20) << usr->getType() << " |" << endl;
+			cout << string(47, '-') << endl;
+		}
+	}
+	cout << "Нажмите любую кнопку, чтобы продолжить" << endl;
+	while (true) {
+		if (_kbhit()) {
+			while (_kbhit()) _getch();
+			break;
+		}
+	}
+	file.close();
+}
+
+void view() {
+	system("cls");
+	int choice;
+	cout << "1. Вывести всех" << endl;
+	cout << "2. Вывести администраторов" << endl;
+	cout << "3. Вывести судей" << endl;
+	cout << "0. Вернуться назад" << endl;
+	while (true) {
+		cin >> choice;
+		if (cin.fail()) {
+			cout << "Ошибка ввода!" << endl;
+			cin.clear();
+			cin.ignore(10000000, '\n');
+			continue;
+		}
+		switch (choice)
+		{
+		case 1:
+			viewUsers();
+			return;
+		case 2:
+			viewAdmins();
+			return;
+		case 3:
+			viewJudges();
+			return;
+		case 0:
+			return;
+		default:
+			break;
+		}
+	}
 }
 
 void AdminSystem(const string& username) {
@@ -143,7 +233,7 @@ void AdminSystem(const string& username) {
 			
 		case 3:
 		{
-			viewUsers();
+			view();
 			break;
 		}	
 		case 0:
