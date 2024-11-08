@@ -4,6 +4,7 @@
 #include <string>
 #include <vector>
 #include <memory>
+#include <conio.h>
 #include "Competition.h"
 #include "Result.h"
 #include "Time.h"
@@ -27,6 +28,13 @@ void addCompetition(vector<shared_ptr<Competition>>& competitions) {
 	cin >> name;
 	if (cin.fail()) {
 		cout << "Ошибка ввода!" << endl;
+		cout << "Нажмите любую кнопку, чтобы продолжить" << endl;
+		while (true) {
+			if (_kbhit()) {
+				while (_kbhit()) _getch();
+				break;
+			}
+		}
 		cin.clear();
 		return;
 	}
@@ -38,6 +46,13 @@ void addCompetition(vector<shared_ptr<Competition>>& competitions) {
 	cin >> type;
 	if (cin.fail()) {
 		cout << "Ошибка ввода!" << endl;
+		cout << "Нажмите любую кнопку, чтобы продолжить" << endl;
+		while (true) {
+			if (_kbhit()) {
+				while (_kbhit()) _getch();
+				break;
+			}
+		}
 		cin.clear();
 		return;
 	}
@@ -58,17 +73,35 @@ void addCompetition(vector<shared_ptr<Competition>>& competitions) {
 	}
 	competitions.push_back(competition);
 	cout << "Соревнование добавлено!" << endl;
+	cout << "Нажмите любую кнопку, чтобы продолжить" << endl;
+	while (true) {
+		if (_kbhit()) {
+			while (_kbhit()) _getch();
+			break;
+		}
+	}
 }
 
 void addResult(vector<shared_ptr<Competition>>& competitions) {
+	system("cls");
+	cout << "| " << setw(30) << left << "Имя соревнования" << " |" << endl;
+	cout << string(34, '-') << endl;
 	for (const auto& competition : competitions) {
-		cout << competition->getName() << endl;
+		cout << "| " << setw(30) << left << competition->getName() << " |" << endl;
+		cout << string(34, '-') << endl;
 	}
 	string name;
 	cout << "Введите имя соревнования, в которое необходимо добавить результат: ";
 	cin >> name;
 	if (cin.fail()) {
 		cout << "Ошибка ввода!" << endl;
+		cout << "Нажмите любую кнопку, чтобы продолжить" << endl;
+		while (true) {
+			if (_kbhit()) {
+				while (_kbhit()) _getch();
+				break;
+			}
+		}
 		cin.clear();
 		return;
 	}
@@ -88,6 +121,13 @@ void addResult(vector<shared_ptr<Competition>>& competitions) {
 			cin >> age;
 			if (cin.fail()) {
 				cout << "Ошибка ввода!" << endl;
+				cout << "Нажмите любую кнопку, чтобы продолжить" << endl;
+				while (true) {
+					if (_kbhit()) {
+						while (_kbhit()) _getch();
+						break;
+					}
+				}
 				cin.clear();
 				return;
 			}
@@ -107,6 +147,13 @@ void addResult(vector<shared_ptr<Competition>>& competitions) {
 				shared_ptr<Result> ptr = make_shared<TimeResult>(participant, time);
 				competition->addParticipant(ptr);
 				cout << "Результат добавлен!" << endl;
+				cout << "Нажмите любую кнопку, чтобы продолжить" << endl;
+				while (true) {
+					if (_kbhit()) {
+						while (_kbhit()) _getch();
+						break;
+					}
+				}
 				return;
 			}
 			if (typeid(*competition) == typeid(ScoreCompetition)) {
@@ -121,6 +168,13 @@ void addResult(vector<shared_ptr<Competition>>& competitions) {
 				shared_ptr<Result> ptr = make_shared<ScoreResult>(participant, score);
 				competition->addParticipant(ptr);
 				cout << "Результат добавлен!" << endl;
+				cout << "Нажмите любую кнопку, чтобы продолжить" << endl;
+				while (true) {
+					if (_kbhit()) {
+						while (_kbhit()) _getch();
+						break;
+					}
+				}
 				return;
 			}
 			if (typeid(*competition) == typeid(TextCompetition)) {
@@ -129,30 +183,62 @@ void addResult(vector<shared_ptr<Competition>>& competitions) {
 				cin.ignore();
 				getline(cin, text);
 				if (cin.fail()) {
-					cout << "Input failed!" << endl;
+					cout << "Ошибка ввода!" << endl;
+					cout << "Нажмите любую кнопку, чтобы продолжить" << endl;
+					while (true) {
+						if (_kbhit()) {
+							while (_kbhit()) _getch();
+							break;
+						}
+					}
 					cin.clear();
 					return;
 				}
 				shared_ptr<Result> ptr = make_shared<TextResult>(participant, text);
 				competition->addParticipant(ptr);
 				cout << "Результат добавлен!" << endl;
+				cout << "Нажмите любую кнопку, чтобы продолжить" << endl;
+				while (true) {
+					if (_kbhit()) {
+						while (_kbhit()) _getch();
+						break;
+					}
+				}
 				return;
 			}
 		}
 	}
 	cout << "Соревнование не найдено!" << endl;
+	cout << "Нажмите любую кнопку, чтобы продолжить" << endl;
+	while (true) {
+		if (_kbhit()) {
+			while (_kbhit()) _getch();
+			break;
+		}
+	}
 }
 
 void display(const vector<shared_ptr<Competition>>& competitions) {
-	for (const auto& comp : competitions) {
-		cout << comp->getName() << endl;
+	system("cls");
+	cout << "| " << setw(30) << left << "Имя соревнования" << " |" << endl;
+	cout << string(34, '-') << endl;
+	for (const auto& competition : competitions) {
+		cout << "| " << setw(30) << left << competition->getName() << " |" << endl;
+		cout << string(34, '-') << endl;
 	}
 	string name;
 	cout << "Введите имя соревнования, которое необходимо вывести на экран: ";
 	cin >> name;
 	if (cin.fail()) {
-		cout << "Input failed!" << endl;
+		cout << "Ошибка ввода!" << endl;
 		cin.clear();
+		cout << "Нажмите любую кнопку, чтобы продолжить" << endl;
+		while (true) {
+			if (_kbhit()) {
+				while (_kbhit()) _getch();
+				break;
+			}
+		}
 		return;
 	}
 	for (const auto& comp : competitions) {
@@ -170,20 +256,44 @@ void display(const vector<shared_ptr<Competition>>& competitions) {
 				<< " |" << endl;
 			cout << string(120, '-');
 			comp->display();
+			cout << "Нажмите любую кнопку, чтобы продолжить" << endl;
+			while (true) {
+				if (_kbhit()) {
+					while (_kbhit()) _getch();
+					break;
+				}
+			}
 			return;
 		}
 	}
 	cout << "Соревнование не найдено!" << endl;
+	cout << "Нажмите любую кнопку, чтобы продолжить" << endl;
+	while (true) {
+		if (_kbhit()) {
+			while (_kbhit()) _getch();
+			break;
+		}
+	}
 }
 void outputToFile(vector<shared_ptr<Competition>>& competitions) {
-	for (const auto& comp : competitions) {
-		cout << comp->getName() << endl;
+	cout << "| " << setw(30) << left << "Имя соревнования" << " |" << endl;
+	cout << string(34, '-') << endl;
+	for (const auto& competition : competitions) {
+		cout << "| " << setw(30) << left << competition->getName() << " |" << endl;
+		cout << string(34, '-') << endl;
 	}
 	string name;
-	cout << "Введите имя соревнования, которое необходимо вывести на экран: ";
+	cout << "Введите имя соревнования, для которого необходимо составить отчёт: ";
 	cin >> name;
 	if (cin.fail()) {
-		cout << "Input failed!" << endl;
+		cout << "Ошибка ввода!" << endl;
+		cout << "Нажмите любую кнопку, чтобы продолжить" << endl;
+		while (true) {
+			if (_kbhit()) {
+				while (_kbhit()) _getch();
+				break;
+			}
+		}
 		cin.clear();
 		return;
 	}
@@ -205,6 +315,14 @@ void outputToFile(vector<shared_ptr<Competition>>& competitions) {
 			file << string(120, '-') << endl;
 			comp->outputToFile(file);
 			file.close();
+			cout << "Отчёт создан!" << endl;
+			cout << "Нажмите любую кнопку, чтобы продолжить" << endl;
+			while (true) {
+				if (_kbhit()) {
+					while (_kbhit()) _getch();
+					break;
+				}
+			}
 			return;
 		}
 	}

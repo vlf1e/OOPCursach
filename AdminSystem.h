@@ -5,12 +5,13 @@
 #include <string>
 #include <vector>
 #include <memory>
+#include <conio.h>
 #include "User.h"
 
 using namespace std;
 
 void showMenu(const string& username) {
-	//system("cls");
+	system("cls");
 	cout << "Добро пожаловать " << username << '!' << endl;
 	cout << "1. Добавить пользователя" << endl;
 	cout << "2. Удалить пользователя" << endl;
@@ -18,6 +19,7 @@ void showMenu(const string& username) {
 	cout << "0. Выход" << endl;
 }
 void addUser() {
+	system("cls");
 	ofstream file("Users.txt", ios::app);
 	string login, password, type;
 	int choice;
@@ -69,8 +71,17 @@ void deleteUser(const string& username) {
 		if (usr->getLogin() == username) continue;
 		file2 << *usr << endl;
 	}
+	cout << "Удаление успешно!" << endl;
+	cout << "Нажмите любую кнопку, чтобы продолжить" << endl;
+	while (true) {
+		if (_kbhit()) {
+			while (_kbhit()) _getch();
+			break;
+		}
+	}
 }
 void viewUsers() {
+	system("cls");
 	ifstream file("Users.txt");
 	vector<unique_ptr<User>> users;
 	User user;
@@ -84,6 +95,13 @@ void viewUsers() {
 		cout << "| " << setw(20) << usr->getLogin() 
 			<< " | " << setw(20) << usr->getType() << " |" << endl;
 		cout << string(47, '-') << endl;
+	}
+	cout << "Нажмите любую кнопку, чтобы продолжить" << endl;
+	while (true) {
+		if (_kbhit()) {
+			while (_kbhit()) _getch();
+			break;
+		}
 	}
 	file.close();
 }
@@ -105,6 +123,7 @@ void AdminSystem(const string& username) {
 			break;
 		case 2:
 		{
+			system("cls");
 			string username;
 			cout << "Введите имя пользователя, которого вы хотите удалить" << endl;
 			cin >> username;

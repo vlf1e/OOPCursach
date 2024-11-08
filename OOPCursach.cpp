@@ -11,7 +11,7 @@ using namespace std;
 int main()
 {
 	setlocale(LC_ALL, "");
-	AdminSystem("loh");
+	//AdminSystem("loh");
 	vector<unique_ptr<User>> users;
 	User user;
 	ifstream file("Users.txt");
