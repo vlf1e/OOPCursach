@@ -10,7 +10,7 @@
 
 using namespace std;
 
-void ShowMenu() {
+void ShowMenu(const string& username) {
 	system("cls");
 	cout << "1. Добавить соревнование" << endl;
 	cout << "2. Зарегистрировать результат" << endl;
@@ -209,10 +209,10 @@ void outputToFile(vector<shared_ptr<Competition>>& competitions) {
 		}
 	}
 }
-void JudgeSystem() {
+void JudgeSystem(const string& username) {
 	vector<shared_ptr<Competition>> competitions;
 	while (true) {
-		ShowMenu();
+		ShowMenu(username);
 		int choice;
 		cin >> choice;
 		if (cin.fail()) {

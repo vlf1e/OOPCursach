@@ -1,5 +1,6 @@
 #pragma once
 #include <string>
+#include <fstream>
 #include <functional>
 #include <random>
 #include <ctime>
@@ -40,13 +41,13 @@ class User {
 		return hashPass;
 	}
 public:
+	User() = default;
 	User(const string& login, const string& password, const string& type) : 
 		login(login), type(type) {
 		if (password.size() < 8) throw UserException("ֿאנמכü המכזום סמסעמÿעü טח במכוו קול 8 סטלגמכמג!");
 		this->salt = generateRandomString();
 		this->password = hashPassword(password, this->salt);
 	}
-	
 	bool checkpassword(string& pass) {
 		size_t temp = hashPassword(pass, this->salt);
 		return this->password == temp;
@@ -58,5 +59,13 @@ public:
 	void setPassword(const string& newPassword) {
 		salt = generateRandomString();
 		password = hashPassword(newPassword, salt);
+	}
+	friend ifstream& operator>>(ifstream& i, User& u) {
+		i >> u.login >> u.password >> u.salt >> u.type;
+		return i;
+	}
+	friend ofstream& operator<<(ofstream& o, const User& u) {
+		o << u.login << ' ' << u.password << ' ' << u.salt << ' ' << u.type;
+		return o;
 	}
 };
