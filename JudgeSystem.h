@@ -42,6 +42,7 @@ void ShowMenu(const string& username) {
 	cout << "2. Зарегистрировать результат" << endl;
 	cout << "3. Посмотреть итоги соревнований" << endl;
 	cout << "4. Вывести итоги соревнования в файл" << endl;
+	cout << "5. Загрузить данные из файлов" << endl;
 	cout << "0. Выход" << endl;
 	cout << "Ваш выбор: ";
 }
@@ -540,12 +541,12 @@ void getDataFromFile(vector<shared_ptr<Competition>>& competitions) {
 		shared_ptr<TimeCompetition> timeComp = make_shared<TimeCompetition>(n);
 		shared_ptr<ScoreCompetition> scoreComp = make_shared<ScoreCompetition>(n);
 		shared_ptr<TextCompetition> textComp = make_shared<TextCompetition>(n);
-		int minutes, seconds, milliseconds;
+		int minutes = 100, seconds = 100, milliseconds = 1000;
 		double scr;
 		string filename_and_path = "Отчёты\\Отчёт соревнования " + n + ".txt";
 		ifstream in(filename_and_path);
 		while (in) {
-			if (filter) {
+			if (filter && line[0] != '-') {
 				stringstream ss(line);
 				string secondName, firstName, surname, country, score;
 				int age;
@@ -559,8 +560,8 @@ void getDataFromFile(vector<shared_ptr<Competition>>& competitions) {
 					isTime = true;
 					count = 0;
 					string temp = "";
-					for (const auto& ch : score) {
-						if (ch == ':' && count == 0) {
+					for (int i = 0; i < score.size() + 1; i++) {
+						if (score[i] == ':' && count == 0) {
 							count++;
 							try {
 								minutes = stoi(temp);
@@ -570,8 +571,9 @@ void getDataFromFile(vector<shared_ptr<Competition>>& competitions) {
 								break;
 							}
 							temp = "";
+							continue;
 						}
-						if (ch == ':' && count == 1) {
+						else if (score[i] == ':' && count == 1) {
 							count++;
 							try {
 								seconds = stoi(temp);
@@ -581,8 +583,9 @@ void getDataFromFile(vector<shared_ptr<Competition>>& competitions) {
 								break;
 							}
 							temp = "";
+							continue;
 						}
-						if (ch == ':' && count == 2) {
+						else if (count == 2 && i == score.size()) {
 							try {
 								milliseconds = stoi(temp);
 							}
@@ -591,8 +594,9 @@ void getDataFromFile(vector<shared_ptr<Competition>>& competitions) {
 								break;
 							}
 							temp = "";
+							continue;
 						}
-						temp.push_back(ch);
+						temp.push_back(score[i]);
 					}
 				}
 				else {
@@ -609,22 +613,18 @@ void getDataFromFile(vector<shared_ptr<Competition>>& competitions) {
 					shared_ptr<TimeResult> res = make_shared<TimeResult>(part, time);
 					timeComp->addParticipant(res);
 					competitions.push_back(timeComp);
-					return;
 				}
 				if (isScore) {
 					shared_ptr<ScoreResult> res = make_shared<ScoreResult>(part, scr);
 					scoreComp->addParticipant(res);
 					competitions.push_back(scoreComp);
-					return;
 				}
 			}
 			getline(in, line);
-			if (line[0] == '-') continue;
 			if (line[0] == '|') {
 				line = filterLine(line);
 				filter = true;
 			}
-			cout << line << endl;
 		}
 	}
 }
@@ -654,6 +654,9 @@ void JudgeSystem(const string& username) {
 			break;
 		case 4:
 			makeReport(competitions);
+			break;
+		case 5:
+			getDataFromFile(competitions);
 			break;
 		case 0:
 			system("cls");
