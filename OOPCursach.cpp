@@ -9,9 +9,18 @@
 
 using namespace std;
 
+void showProgramMenu() {
+	system("cls");
+	cout << "Добро пожаловать в автоматизированную систему судейства по различным видам спорта!" << endl;
+	cout << "Что хотите сделать:" << endl;
+	cout << "1. Зайти в аккаунт" << endl;
+	cout << "2. Использовать гостевой доступ" << endl;
+	cout << "0. Выход" << endl;
+	cout << "Ваш выбор: ";
+}
+
 int main()
 {
-	//ofstream file1("Отчёты\\1.txt");
 	setlocale(LC_ALL, "");
 	vector<unique_ptr<User>> users;
 	User user;
@@ -21,12 +30,7 @@ int main()
 	}
 	int choice;
 	while (true) {
-		cout << "Добро пожаловать в автоматизированную систему судейства по различным видам спорта!" << endl;
-		cout << "Что хотите сделать:" << endl;
-		cout << "1. Зайти в аккаунт" << endl;
-		cout << "2. Использовать гостевой доступ" << endl;
-		cout << "0. Выход" << endl;
-		cout << "Ваш выбор: ";
+		showProgramMenu();
 		cin >> choice;
 		if (cin.fail()) {
 			cin.clear();
@@ -73,16 +77,20 @@ int main()
 								}
 								else return 0;
 							}
-							else cout << "Неверный пароль!" << endl;
+							else {
+								password = "";
+								cout << "Неверный пароль!" << endl;
+							}
 						}
 					}
 				}
 				if (!found) cout << "Неверный логин!" << endl;
 			}
-			else if (login == "Guest" || login == "guest") {
-				//guestMenu()
-			}
+			continue;
 		}
+		case 2:
+			GuestSystem();
+			break;
 		case 0:
 			system("cls");
 			cout << "До свидания!";

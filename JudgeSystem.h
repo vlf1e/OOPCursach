@@ -278,6 +278,7 @@ void display(const vector<shared_ptr<Competition>>& competitions) {
 }
 
 void makeReport(vector<shared_ptr<Competition>>& competitions) {
+	system("cls");
 	cout << "| " << setw(30) << left << "Имя соревнования" << " |" << endl;
 	cout << string(34, '-') << endl;
 	for (const auto& competition : competitions) {
@@ -318,6 +319,25 @@ void makeReport(vector<shared_ptr<Competition>>& competitions) {
 			file << string(120, '-') << endl;
 			comp->outputToFile(file);
 			file.close();
+			ifstream tempIn("temp\\competitions_names.txt");
+			string temp;
+			while (tempIn >> temp) {
+				if (temp == name) {
+					cout << "Отчёт создан!" << endl;
+					cout << "Нажмите любую кнопку, чтобы продолжить" << endl;
+					while (true) {
+						if (_kbhit()) {
+							while (_kbhit()) _getch();
+							break;
+						}
+					}
+					tempIn.close();
+					return;
+				}
+			}
+			ofstream tempOut("temp\\competitions_names.txt", ios::app);
+			tempOut << name << endl;
+			tempOut.close();
 			cout << "Отчёт создан!" << endl;
 			cout << "Нажмите любую кнопку, чтобы продолжить" << endl;
 			while (true) {
