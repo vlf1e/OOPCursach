@@ -10,11 +10,11 @@
 using namespace std;
 
 void showMenu(const string& username) {
-	system("cls");
+	//system("cls");
 	cout << "Добро пожаловать " << username << '!' << endl;
 	cout << "1. Добавить пользователя" << endl;
 	cout << "2. Удалить пользователя" << endl;
-	cout << "3. Посмотреть пользователя" << endl;
+	cout << "3. Посмотреть пользователей и их данные" << endl;
 	cout << "0. Выход" << endl;
 }
 void addUser() {
@@ -70,6 +70,23 @@ void deleteUser(const string& username) {
 		file2 << *usr << endl;
 	}
 }
+void viewUsers() {
+	ifstream file("Users.txt");
+	vector<unique_ptr<User>> users;
+	User user;
+	while (file >> user) {
+		users.push_back(make_unique<User>(user));
+	}
+	cout << "| " << setw(20) << left << "Логин"
+		<< " | " << setw(20) << left << "Роль" << " |" << endl;
+	cout << string(47, '-') << endl;
+	for (const auto& usr : users) {
+		cout << "| " << setw(20) << usr->getLogin() 
+			<< " | " << setw(20) << usr->getType() << " |" << endl;
+		cout << string(47, '-') << endl;
+	}
+	file.close();
+}
 void AdminSystem(const string& username) {
 	int choice;
 	while (true) {
@@ -97,9 +114,7 @@ void AdminSystem(const string& username) {
 			
 		case 3:
 		{
-			ifstream file("Users.txt");
-			cout << file.rdbuf();
-			file.close();
+			viewUsers();
 			break;
 		}	
 		case 0:
