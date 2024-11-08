@@ -219,7 +219,33 @@ void addResult(vector<shared_ptr<Competition>>& competitions) {
 	}
 }
 
-void display(const vector<shared_ptr<Competition>>& competitions) {
+void displayAll(const vector<shared_ptr<Competition>>& competitions) {
+	system("cls");
+	for (const auto& comp : competitions) {
+		if (typeid(*comp) != typeid(TextCompetition)) comp->sortParticipantsByScore();
+		cout << "Соревнование: " << comp->getName() << endl;
+		cout << string(120, '-');
+		cout << "| " << setw(5) << left << "Место"
+			<< " | " << setw(17) << left << "Фамилия"
+			<< " | " << setw(15) << left << "Имя"
+			<< " | " << setw(15) << left << "Отчество"
+			<< " | " << setw(16) << left << "Страна"
+			<< " | " << setw(10) << left << "Возраст"
+			<< " | " << setw(20) << left << "Результат"
+			<< " |" << endl;
+		cout << string(120, '-');
+		comp->display();
+	}
+	cout << "Нажмите любую кнопку, чтобы продолжить" << endl;
+	while (true) {
+		if (_kbhit()) {
+			while (_kbhit()) _getch();
+			break;
+		}
+	}
+}
+
+void displayByName(const vector<shared_ptr<Competition>>& competitions) {
 	system("cls");
 	cout << "| " << setw(30) << left << "Имя соревнования" << " |" << endl;
 	cout << string(34, '-') << endl;
@@ -272,6 +298,134 @@ void display(const vector<shared_ptr<Competition>>& competitions) {
 	while (true) {
 		if (_kbhit()) {
 			while (_kbhit()) _getch();
+			break;
+		}
+	}
+}
+
+void displayTimeComp(const vector<shared_ptr<Competition>>& competitions) {
+	system("cls");
+	for (const auto& comp : competitions) {
+		if (typeid(*comp) == typeid(TimeCompetition)) {
+			comp->sortParticipantsByScore();
+			cout << "Соревнование: " << comp->getName() << endl;
+			cout << string(120, '-');
+			cout << "| " << setw(5) << left << "Место"
+				<< " | " << setw(17) << left << "Фамилия"
+				<< " | " << setw(15) << left << "Имя"
+				<< " | " << setw(15) << left << "Отчество"
+				<< " | " << setw(16) << left << "Страна"
+				<< " | " << setw(10) << left << "Возраст"
+				<< " | " << setw(20) << left << "Результат"
+				<< " |" << endl;
+			cout << string(120, '-');
+			comp->display();
+		}
+	}
+	cout << "Нажмите любую кнопку, чтобы продолжить" << endl;
+	while (true) {
+		if (_kbhit()) {
+			while (_kbhit()) _getch();
+			break;
+		}
+	}
+}
+
+void displayScoreComp(vector<shared_ptr<Competition>>& competitions) {
+	system("cls");
+	for (const auto& comp : competitions) {
+		if (typeid(*comp) == typeid(ScoreCompetition)) {
+			comp->sortParticipantsByScore();
+			cout << "Соревнование: " << comp->getName() << endl;
+			cout << string(120, '-');
+			cout << "| " << setw(5) << left << "Место"
+				<< " | " << setw(17) << left << "Фамилия"
+				<< " | " << setw(15) << left << "Имя"
+				<< " | " << setw(15) << left << "Отчество"
+				<< " | " << setw(16) << left << "Страна"
+				<< " | " << setw(10) << left << "Возраст"
+				<< " | " << setw(20) << left << "Результат"
+				<< " |" << endl;
+			cout << string(120, '-');
+			comp->display();
+		}
+	}
+	cout << "Нажмите любую кнопку, чтобы продолжить" << endl;
+	while (true) {
+		if (_kbhit()) {
+			while (_kbhit()) _getch();
+			break;
+		}
+	}
+}
+
+void displayTextComp(vector<shared_ptr<Competition>>& competitions) {
+	system("cls");
+	for (const auto& comp : competitions) {
+		if (typeid(*comp) == typeid(TextCompetition)) {
+			comp->sortParticipantsByScore();
+			cout << "Соревнование: " << comp->getName() << endl;
+			cout << string(120, '-');
+			cout << "| " << setw(5) << left << "Место"
+				<< " | " << setw(17) << left << "Фамилия"
+				<< " | " << setw(15) << left << "Имя"
+				<< " | " << setw(15) << left << "Отчество"
+				<< " | " << setw(16) << left << "Страна"
+				<< " | " << setw(10) << left << "Возраст"
+				<< " | " << setw(20) << left << "Результат"
+				<< " |" << endl;
+			cout << string(120, '-');
+			comp->display();
+		}
+	}
+	cout << "Нажмите любую кнопку, чтобы продолжить" << endl;
+	while (true) {
+		if (_kbhit()) {
+			while (_kbhit()) _getch();
+			break;
+		}
+	}
+}
+
+void display(vector<shared_ptr<Competition>>& competitions) {
+	system("cls");
+	int choice;
+	cout << "Что вывести?" << endl;
+	cout << "1. Вывести все" << endl;
+	cout << "2. Вывести конкретное соревнование" << endl;
+	cout << "3. Вывести все соровнования с типом оценки \"Время\"" << endl;
+	cout << "4. Вывести все соровнования с типом оценки \"Очки\"" << endl;
+	cout << "5. Вывести все соровнования с типом оценки \"Текст\"" << endl;
+	cout << "0. Вернуться назад" << endl;
+	cout << "Ваш выбор: " << endl;
+	while (true) {
+		cin >> choice;
+		if (cin.fail()) {
+			cout << "Ошибка ввода!" << endl;
+			cin.clear();
+			cin.ignore(1000000, '\n');
+			continue;
+		}
+		switch (choice)
+		{
+		case 1:
+			displayAll(competitions);
+			return;
+		case 2:
+			displayByName(competitions);
+			return;
+		case 3:
+			displayTimeComp(competitions);
+			return;
+		case 4:
+			displayScoreComp(competitions);
+			return;
+		case 5:
+			displayTextComp(competitions);
+			return;
+		case 0:
+			return;
+		default:
 			break;
 		}
 	}
