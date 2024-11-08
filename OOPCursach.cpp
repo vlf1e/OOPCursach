@@ -1,5 +1,6 @@
 ﻿#include "JudgeSystem.h"
 #include "AdminSystem.h"
+#include "GuestSystem.h"
 #include "User.h"
 #include <iostream>
 #include <fstream>
@@ -10,46 +11,93 @@ using namespace std;
 
 int main()
 {
+	//ofstream file1("Отчёты\\1.txt");
 	setlocale(LC_ALL, "");
-	//AdminSystem("loh");
 	vector<unique_ptr<User>> users;
 	User user;
 	ifstream file("Users.txt");
 	while (file >> user) {
 		users.push_back(make_unique<User>(user));
 	}
+	int choice;
 	while (true) {
-		system("cls");
-		string login, password;
-		cout << "Введите логин" << endl;
-		cin >> login;
-		if (login != "Guest") {
-			bool found = 0;
-			for (const auto& usr : users) {
-				if (usr->getLogin() == login) {
-					found = 1;
-					while (true) {
-						cout << "Введите пароль: " << endl;
-						cin >> password;
-						if (usr->checkpassword(password)) {
-							if (usr->getType() == "Администратор") {
-								AdminSystem(usr->getLogin());
-								break;
-							}
-							else if (usr->getType() == "Судья") {
-								JudgeSystem(usr->getLogin());
-								break;
-							}
-							else return 0;
-						}
-						else cout << "Неверный пароль!" << endl;
-					}
+		cout << "Добро пожаловать в автоматизированную систему судейства по различным видам спорта!" << endl;
+		cout << "Что хотите сделать:" << endl;
+		cout << "1. Зайти в аккаунт" << endl;
+		cout << "2. Использовать гостевой доступ" << endl;
+		cout << "0. Выход" << endl;
+		cout << "Ваш выбор: ";
+		cin >> choice;
+		if (cin.fail()) {
+			cin.clear();
+			cin.ignore(100000000, '\n');
+			cout << "Ошибка ввода!" << endl;
+			cout << "Нажмите любую кнопку, чтобы продолжить" << endl;
+			while (true) {
+				if (_kbhit()) {
+					while (_kbhit()) _getch();
+					break;
 				}
 			}
-			if(!found) cout << "Неверный логин!" << endl;
+			continue;
 		}
-		else if (login == "Guest" || login == "guest") {
-			//guestMenu()
+		switch (choice)
+		{
+		case 1:
+		{
+			system("cls");
+			string login, password = "";
+			cout << "Введите логин" << endl;
+			cin >> login;
+			if (login != "Guest") {
+				bool found = 0;
+				for (const auto& usr : users) {
+					if (usr->getLogin() == login) {
+						found = 1;
+						while (true) {
+							char ch;
+							cout << "Введите пароль: " << endl;
+							while ((ch = _getch()) != '\r') {
+								password.push_back(ch);
+								cout << '*';
+							}
+							cout << endl;
+							if (usr->checkpassword(password)) {
+								if (usr->getType() == "Администратор") {
+									AdminSystem(usr->getLogin());
+									break;
+								}
+								else if (usr->getType() == "Судья") {
+									JudgeSystem(usr->getLogin());
+									break;
+								}
+								else return 0;
+							}
+							else cout << "Неверный пароль!" << endl;
+						}
+					}
+				}
+				if (!found) cout << "Неверный логин!" << endl;
+			}
+			else if (login == "Guest" || login == "guest") {
+				//guestMenu()
+			}
+		}
+		case 0:
+			system("cls");
+			cout << "До свидания!";
+			return 0;
+		default:
+			system("cls");
+			cout << "Ошибка ввода!" << endl;
+			cout << "Нажмите любую кнопку, чтобы продолжить" << endl;
+			while (true) {
+				if (_kbhit()) {
+					while (_kbhit()) _getch();
+					break;
+				}
+			}
+			break;
 		}
 	}
 	return 0;

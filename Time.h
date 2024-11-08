@@ -28,6 +28,7 @@ public:
 		this->seconds = sec;
 		this->milliseconds = millsec;
 	}
+
 	friend istream& operator>>(istream& i, Time& t) {
 		char ch;
 		i >> t.minutes >> ch >> t.seconds >> ch >> t.milliseconds;

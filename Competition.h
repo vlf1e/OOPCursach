@@ -13,7 +13,9 @@ protected:
 	string name;
 public:
 	Competition(const string& name) : name(name) {}
+
 	virtual const string getName() const { return name; }
+
 	virtual void addParticipant(shared_ptr<Result>) = 0;
 	virtual void removeParticipant(const string& secondName, const string& firstName, const string& surname) = 0;
 	virtual void sortParticipantsByScore() = 0;
@@ -26,6 +28,7 @@ class TimeCompetition : public Competition {
 public:
 	vector<shared_ptr<TimeResult>> results;
 	TimeCompetition(const string& name) : Competition(name) {}
+
 	void addParticipant(shared_ptr<Result> result) override {
 		results.push_back(static_pointer_cast<TimeResult>(result));
 	}
@@ -71,6 +74,7 @@ class ScoreCompetition : public Competition {
 public:
 	vector<shared_ptr<ScoreResult>> results;
 	ScoreCompetition(const string& name) : Competition(name) {}
+
 	void addParticipant(shared_ptr<Result> result) override {
 		results.push_back(static_pointer_cast<ScoreResult>(result));
 	}
@@ -116,6 +120,7 @@ class TextCompetition : public Competition {
 public:
 	vector<shared_ptr<TextResult>> results;
 	TextCompetition(const string& name) : Competition(name) {}
+
 	void addParticipant(shared_ptr<Result> result) override {
 		results.push_back(static_pointer_cast<TextResult>(result));
 	}

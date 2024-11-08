@@ -48,18 +48,22 @@ public:
 		this->salt = generateRandomString();
 		this->password = hashPassword(password, this->salt);
 	}
+
 	bool checkpassword(string& pass) {
 		size_t temp = hashPassword(pass, this->salt);
 		return this->password == temp;
 	}
+
 	const string getLogin() { return login; }
 	const string getType() { return type; }
+
 	void setLogin(const string& newLogin) { login = newLogin; }
 	void setType(const string& newType) { type = newType; }
 	void setPassword(const string& newPassword) {
 		salt = generateRandomString();
 		password = hashPassword(newPassword, salt);
 	}
+
 	friend ifstream& operator>>(ifstream& i, User& u) {
 		i >> u.login >> u.password >> u.salt >> u.type;
 		return i;

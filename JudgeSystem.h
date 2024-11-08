@@ -13,6 +13,7 @@ using namespace std;
 
 void ShowMenu(const string& username) {
 	system("cls");
+	cout << "Добро пожаловать, " << username << '!' << endl;
 	cout << "1. Добавить соревнование" << endl;
 	cout << "2. Зарегистрировать результат" << endl;
 	cout << "3. Посмотреть итоги соревнований" << endl;
@@ -275,7 +276,8 @@ void display(const vector<shared_ptr<Competition>>& competitions) {
 		}
 	}
 }
-void outputToFile(vector<shared_ptr<Competition>>& competitions) {
+
+void makeReport(vector<shared_ptr<Competition>>& competitions) {
 	cout << "| " << setw(30) << left << "Имя соревнования" << " |" << endl;
 	cout << string(34, '-') << endl;
 	for (const auto& competition : competitions) {
@@ -297,7 +299,8 @@ void outputToFile(vector<shared_ptr<Competition>>& competitions) {
 		cin.clear();
 		return;
 	}
-	ofstream file("Отчёт.txt");
+	string filename_and_path = "Отчёты\\Отчёт соревнования " + name + ".txt";
+	ofstream file(filename_and_path);
 	for (const auto& comp : competitions) {
 		int i = 1;
 		if (comp->getName() == name) {
@@ -327,6 +330,7 @@ void outputToFile(vector<shared_ptr<Competition>>& competitions) {
 		}
 	}
 }
+
 void JudgeSystem(const string& username) {
 	vector<shared_ptr<Competition>> competitions;
 	while (true) {
@@ -350,13 +354,19 @@ void JudgeSystem(const string& username) {
 			display(competitions);
 			break;
 		case 4:
-			outputToFile(competitions);
+			makeReport(competitions);
 			break;
 		case 0:
 			system("cls");
-			cout << "Выход из программы." << endl;
+			cout << "До свидания, " << username << endl;
+			cout << "Нажмите любую кнопку, чтобы продолжить" << endl;
+			while (true) {
+				if (_kbhit()) {
+					while (_kbhit()) _getch();
+					break;
+				}
+			}
 			return;
-			break;
 		default:
 			cout << "Неверный выбор!" << endl;
 			break;
