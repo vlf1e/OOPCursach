@@ -1,4 +1,5 @@
-﻿#include "JudgeSystem.h"
+﻿#include <Windows.h>
+#include "JudgeSystem.h"
 #include "AdminSystem.h"
 #include "GuestSystem.h"
 #include "User.h"
@@ -9,9 +10,33 @@
 
 using namespace std;
 
+namespace Color {
+	enum TextColor {
+		DEFAULT = 7,
+		RED = 4,
+		GREEN = 2,
+		BLUE = 1,
+		YELLOW = 6,
+		MAGENTA = 5,
+		CYAN = 3,
+		WHITE = 15
+	};
+
+	void setTextColor(TextColor color) {
+		HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
+		SetConsoleTextAttribute(hConsole, color);
+	}
+
+	void resetTextColor() {
+		setTextColor(DEFAULT);
+	}
+}
+
 void showProgramMenu() {
 	system("cls");
+	Color::setTextColor(Color::MAGENTA);
 	cout << "Добро пожаловать в автоматизированную систему судейства по различным видам спорта!" << endl;
+	Color::resetTextColor();
 	cout << "Что хотите сделать:" << endl;
 	cout << "1. Зайти в аккаунт" << endl;
 	cout << "2. Использовать гостевой доступ" << endl;

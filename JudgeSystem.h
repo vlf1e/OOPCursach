@@ -1,4 +1,4 @@
-#pragma once
+ï»¿#pragma once
 #include <iostream>
 #include <fstream>
 #include <sstream>
@@ -37,24 +37,24 @@ const string filterLine(const string& line) {
 
 void ShowMenu(const string& username) {
 	system("cls");
-	cout << "Äîáðî ïîæàëîâàòü, " << username << '!' << endl;
-	cout << "1. Äîáàâèòü ñîðåâíîâàíèå" << endl;
-	cout << "2. Çàðåãèñòðèðîâàòü ðåçóëüòàò" << endl;
-	cout << "3. Ïîñìîòðåòü èòîãè ñîðåâíîâàíèé" << endl;
-	cout << "4. Âûâåñòè èòîãè ñîðåâíîâàíèÿ â ôàéë" << endl;
-	cout << "5. Çàãðóçèòü äàííûå èç ôàéëîâ" << endl;
-	cout << "0. Âûõîä" << endl;
-	cout << "Âàø âûáîð: ";
+	cout << "Ð”Ð¾Ð±Ñ€Ð¾ Ð¿Ð¾Ð¶Ð°Ð»Ð¾Ð²Ð°Ñ‚ÑŒ, " << username << '!' << endl;
+	cout << "1. Ð”Ð¾Ð±Ð°Ð²Ð¸Ñ‚ÑŒ ÑÐ¾Ñ€ÐµÐ²Ð½Ð¾Ð²Ð°Ð½Ð¸Ðµ" << endl;
+	cout << "2. Ð—Ð°Ñ€ÐµÐ³ÐµÑÑ‚Ð¸Ñ€Ð¸Ñ€Ð¾Ð²Ð°Ñ‚ÑŒ Ñ€ÐµÐ·ÑƒÐ»ÑŒÑ‚Ð°Ñ‚" << endl;
+	cout << "3. Ð’Ñ‹Ð²Ð¾Ð´ Ñ€ÐµÐ·ÑƒÐ»ÑŒÑ‚Ð°Ñ‚Ð¾Ð²" << endl;
+	cout << "4. Ð¡Ð¾Ð·Ð´Ð°Ð½Ð¸Ðµ Ð¾Ñ‚Ñ‡ÐµÑ‚Ð°" << endl;
+	cout << "5. Ð”Ð¾ÑÑ‚Ð°Ñ‚ÑŒ Ð´Ð°Ð½Ð½Ñ‹Ðµ Ð¸Ð· Ñ„Ð°Ð¹Ð»Ð°" << endl;
+	cout << "0. Ð’Ñ‹Ñ…Ð¾Ð´" << endl;
+	cout << "Ð’Ð°Ñˆ Ð²Ñ‹Ð±Ð¾Ñ€: ";
 }
 
 void addCompetition(vector<shared_ptr<Competition>>& competitions) {
 	string name;
 	system("cls");
-	cout << "Ââåäèòå èìÿ ñîðåâíîâàíèÿ: ";
+	cout << "Ð’Ð²ÐµÐ´Ð¸Ñ‚Ðµ Ð¸Ð¼Ñ ÑÐ¾Ñ€ÐµÐ²Ð½Ð¾Ð²Ð°Ð½Ð¸Ñ: ";
 	cin >> name;
 	if (cin.fail()) {
-		cout << "Îøèáêà ââîäà!" << endl;
-		cout << "Íàæìèòå ëþáóþ êíîïêó, ÷òîáû ïðîäîëæèòü" << endl;
+		cout << "ÐžÑˆÐ¸Ð±ÐºÐ° Ð²Ð²Ð¾Ð´Ð°!" << endl;
+		cout << "ÐÐ°Ð¶Ð¼Ð¸Ñ‚Ðµ Ð»ÑŽÐ±ÑƒÑŽ ÐºÐ½Ð¾Ð¿ÐºÑƒ, Ñ‡Ñ‚Ð¾Ð±Ñ‹ Ð¿Ñ€Ð¾Ð´Ð¾Ð»Ð¶Ð¸Ñ‚ÑŒ" << endl;
 		while (true) {
 			if (_kbhit()) {
 				while (_kbhit()) _getch();
@@ -65,14 +65,14 @@ void addCompetition(vector<shared_ptr<Competition>>& competitions) {
 		return;
 	}
 	int type;
-	cout << "Âûáåðèòå òèï îöåíèâàíèÿ ñîðåâíîâàíèÿ:" << endl;
-	cout << "1. Âðåìÿ" << endl;
-	cout << "2. Î÷êè" << endl;
-	cout << "3. Òåêñò" << endl;
+	cout << "Ð’Ñ‹Ð±ÐµÑ€ÐµÑ‚Ðµ Ñ‚Ð¸Ð¿ Ñ€ÐµÐ·ÑƒÐ»ÑŒÑ‚Ð°Ñ‚Ð°:" << endl;
+	cout << "1. Ð’Ñ€ÐµÐ¼Ñ" << endl;
+	cout << "2. ÐžÑ‡ÐºÐ¸" << endl;
+	cout << "3. Ð¢ÐµÐºÑÑ‚" << endl;
 	cin >> type;
 	if (cin.fail()) {
-		cout << "Îøèáêà ââîäà!" << endl;
-		cout << "Íàæìèòå ëþáóþ êíîïêó, ÷òîáû ïðîäîëæèòü" << endl;
+		cout << "ÐžÑˆÐ¸Ð±ÐºÐ° Ð²Ð²Ð¾Ð´Ð°!!" << endl;
+		cout << "ÐÐ°Ð¶Ð¼Ð¸Ñ‚Ðµ Ð»ÑŽÐ±ÑƒÑŽ ÐºÐ½Ð¾Ð¿ÐºÑƒ, Ñ‡Ñ‚Ð¾Ð±Ñ‹ Ð¿Ñ€Ð¾Ð´Ð¾Ð»Ð¶Ð¸Ñ‚ÑŒ" << endl;
 		while (true) {
 			if (_kbhit()) {
 				while (_kbhit()) _getch();
@@ -94,12 +94,12 @@ void addCompetition(vector<shared_ptr<Competition>>& competitions) {
 		competition = make_shared<TextCompetition>(name);
 		break;
 	default:
-		cout << "Íåâåðíûé òèï îöåíèâàíèÿ!" << endl;
+		cout << "ÐžÑˆÐ¸Ð±ÐºÐ° Ð²Ð²Ð¾Ð´Ð°! ÐŸÐ¾Ð¿Ñ€Ð¾Ð±ÑƒÐ¹Ñ‚Ðµ ÐµÑ‰Ñ‘ Ñ€Ð°Ð·!" << endl;
 		return;
 	}
 	competitions.push_back(competition);
-	cout << "Ñîðåâíîâàíèå äîáàâëåíî!" << endl;
-	cout << "Íàæìèòå ëþáóþ êíîïêó, ÷òîáû ïðîäîëæèòü" << endl;
+	cout << "ÐžÑˆÐ¸Ð±ÐºÐ° Ð²Ð²Ð¾Ð´Ð°!" << endl;
+	cout << "ÐÐ°Ð¶Ð¼Ð¸Ñ‚Ðµ Ð»ÑŽÐ±ÑƒÑŽ ÐºÐ½Ð¾Ð¿ÐºÑƒ, Ñ‡Ñ‚Ð¾Ð±Ñ‹ Ð¿Ñ€Ð¾Ð´Ð¾Ð»Ð¶Ð¸Ñ‚ÑŒ" << endl;
 	while (true) {
 		if (_kbhit()) {
 			while (_kbhit()) _getch();
@@ -110,18 +110,18 @@ void addCompetition(vector<shared_ptr<Competition>>& competitions) {
 
 void addResult(vector<shared_ptr<Competition>>& competitions) {
 	system("cls");
-	cout << "| " << setw(30) << left << "Èìÿ ñîðåâíîâàíèÿ" << " |" << endl;
+	cout << "| " << setw(30) << left << "Ð˜Ð¼Ñ ÑÐ¾Ñ€ÐµÐ²Ð½Ð¾Ð²Ð°Ð½Ð¸Ñ" << " |" << endl;
 	cout << string(34, '-') << endl;
 	for (const auto& competition : competitions) {
 		cout << "| " << setw(30) << left << competition->getName() << " |" << endl;
 		cout << string(34, '-') << endl;
 	}
 	string name;
-	cout << "Ââåäèòå èìÿ ñîðåâíîâàíèÿ, â êîòîðîå íåîáõîäèìî äîáàâèòü ðåçóëüòàò: ";
+	cout << "Ð’Ð²ÐµÐ´Ð¸Ñ‚Ðµ Ð¸Ð¼Ñ ÑÐ¾Ñ€ÐµÐ²Ð½Ð¾Ð²Ð°Ð½Ð¸Ñ, ÐºÐ¾Ñ‚Ð¾Ñ€Ð¾Ðµ Ð½ÐµÐ¾Ð±Ñ…Ð¾Ð´Ð¸Ð¼Ð¾ Ð²Ñ‹Ð²ÐµÑÑ‚Ð¸: ";
 	cin >> name;
 	if (cin.fail()) {
-		cout << "Îøèáêà ââîäà!" << endl;
-		cout << "Íàæìèòå ëþáóþ êíîïêó, ÷òîáû ïðîäîëæèòü" << endl;
+		cout << "ÐžÑˆÐ¸Ð±ÐºÐ° Ð²Ð²Ð¾Ð´Ð°!" << endl;
+		cout << "ÐÐ°Ð¶Ð¼Ð¸Ñ‚Ðµ Ð»ÑŽÐ±ÑƒÑŽ ÐºÐ½Ð¾Ð¿ÐºÑƒ, Ñ‡Ñ‚Ð¾Ð±Ñ‹ Ð¿Ñ€Ð¾Ð´Ð¾Ð»Ð¶Ð¸Ñ‚ÑŒ" << endl;
 		while (true) {
 			if (_kbhit()) {
 				while (_kbhit()) _getch();
@@ -135,19 +135,19 @@ void addResult(vector<shared_ptr<Competition>>& competitions) {
 		if (name == competition->getName()) {
 			string secondName, firstName, surname, country;
 			int age;
-			cout << "Ââåäèòå ôàìèëèþ: ";
+			cout << "Ð’Ð²ÐµÐ´Ð¸Ñ‚Ðµ Ñ„Ð°Ð¼Ð¸Ð»Ð¸ÑŽ: ";
 			cin >> secondName;
-			cout << "Ââåäèòå èìÿ: ";
+			cout << "Ð’Ð²ÐµÐ´Ð¸Ñ‚Ðµ Ð¸Ð¼Ñ: ";
 			cin >> firstName;
-			cout << "Ââåäèòå îò÷åñòâî: ";
+			cout << "Ð’Ð²ÐµÐ´Ð¸Ñ‚Ðµ Ð¾Ñ‚Ñ‡ÐµÑÑ‚Ð²Ð¾: ";
 			cin >> surname;
-			cout << "Ââåäèòå ñòðàíó: ";
+			cout << "Ð’Ð²ÐµÐ´Ð¸Ñ‚Ðµ ÑÑ‚Ñ€Ð°Ð½Ñƒ: ";
 			cin >> country;
-			cout << "Ââåäèòå âîçðàñò: ";
+			cout << "Ð’Ð²ÐµÐ´Ð¸Ñ‚Ðµ Ð²Ð¾Ð·Ñ€Ð°ÑÑ‚: ";
 			cin >> age;
 			if (cin.fail()) {
-				cout << "Îøèáêà ââîäà!" << endl;
-				cout << "Íàæìèòå ëþáóþ êíîïêó, ÷òîáû ïðîäîëæèòü" << endl;
+				cout << "ÐžÑˆÐ¸Ð±ÐºÐ° Ð²Ð²Ð¾Ð´Ð°!" << endl;
+				cout << "ÐÐ°Ð¶Ð¼Ð¸Ñ‚Ðµ Ð»ÑŽÐ±ÑƒÑŽ ÐºÐ½Ð¾Ð¿ÐºÑƒ, Ñ‡Ñ‚Ð¾Ð±Ñ‹ Ð¿Ñ€Ð¾Ð´Ð¾Ð»Ð¶Ð¸Ñ‚ÑŒ" << endl;
 				while (true) {
 					if (_kbhit()) {
 						while (_kbhit()) _getch();
@@ -159,7 +159,7 @@ void addResult(vector<shared_ptr<Competition>>& competitions) {
 			}
 			Participant participant(secondName, firstName, surname, country, age);
 			if (typeid(*competition) == typeid(TimeCompetition)) {
-				cout << "Ââåäèòå âðåìÿ (ôîðìàò âðåìåíè: ìèíóòû:ñåêóíäû:ìèëëèñåêóíäû): ";
+				cout << "Ð’Ð²ÐµÐ´Ð¸Ñ‚Ðµ Ð²Ñ€ÐµÐ¼Ñ (ÐŸÑ€Ð¸Ð¼ÐµÑ€ Ð²Ð²Ð¾Ð´Ð°: Ð¼Ð¸Ð½ÑƒÑ‚Ñ‹:ÑÐµÐºÑƒÐ½Ð´Ñ‹:Ð¼Ð¸Ð»Ð»Ð¸ÑÐµÐºÑƒÐ½Ð´Ñ‹): ";
 				Time time;
 				try
 				{
@@ -172,8 +172,8 @@ void addResult(vector<shared_ptr<Competition>>& competitions) {
 
 				shared_ptr<Result> ptr = make_shared<TimeResult>(participant, time);
 				competition->addParticipant(ptr);
-				cout << "Ðåçóëüòàò äîáàâëåí!" << endl;
-				cout << "Íàæìèòå ëþáóþ êíîïêó, ÷òîáû ïðîäîëæèòü" << endl;
+				cout << "ÐžÑˆÐ¸Ð±ÐºÐ° Ð²Ð²Ð¾Ð´Ð°!" << endl;
+				cout << "ÐÐ°Ð¶Ð¼Ð¸Ñ‚Ðµ Ð»ÑŽÐ±ÑƒÑŽ ÐºÐ½Ð¾Ð¿ÐºÑƒ, Ñ‡Ñ‚Ð¾Ð±Ñ‹ Ð¿Ñ€Ð¾Ð´Ð¾Ð»Ð¶Ð¸Ñ‚ÑŒ" << endl;
 				while (true) {
 					if (_kbhit()) {
 						while (_kbhit()) _getch();
@@ -183,18 +183,25 @@ void addResult(vector<shared_ptr<Competition>>& competitions) {
 				return;
 			}
 			if (typeid(*competition) == typeid(ScoreCompetition)) {
-				cout << "Ââåäèòå î÷êè: ";
+				cout << "Ð’Ð²ÐµÐ´Ð¸Ñ‚Ðµ Ð¾Ñ‡ÐºÐ¸: ";
 				double score;
 				cin >> score;
 				if (cin.fail()) {
-					cout << "Îøèáêà ââîäà!" << endl;
+					cout << "ÐžÑˆÐ¸Ð±ÐºÐ° Ð²Ð²Ð¾Ð´Ð°!" << endl;
 					cin.clear();
+					cout << "ÐÐ°Ð¶Ð¼Ð¸Ñ‚Ðµ Ð»ÑŽÐ±ÑƒÑŽ ÐºÐ½Ð¾Ð¿ÐºÑƒ, Ñ‡Ñ‚Ð¾Ð±Ñ‹ Ð¿Ñ€Ð¾Ð´Ð¾Ð»Ð¶Ð¸Ñ‚ÑŒ" << endl;
+					while (true) {
+						if (_kbhit()) {
+							while (_kbhit()) _getch();
+							break;
+						}
+					}
 					return;
 				}
 				shared_ptr<Result> ptr = make_shared<ScoreResult>(participant, score);
 				competition->addParticipant(ptr);
-				cout << "Ðåçóëüòàò äîáàâëåí!" << endl;
-				cout << "Íàæìèòå ëþáóþ êíîïêó, ÷òîáû ïðîäîëæèòü" << endl;
+				cout << "ÐžÑˆÐ¸Ð±ÐºÐ° Ð²Ð²Ð¾Ð´Ð°!" << endl;
+				cout << "ÐÐ°Ð¶Ð¼Ð¸Ñ‚Ðµ Ð»ÑŽÐ±ÑƒÑŽ ÐºÐ½Ð¾Ð¿ÐºÑƒ, Ñ‡Ñ‚Ð¾Ð±Ñ‹ Ð¿Ñ€Ð¾Ð´Ð¾Ð»Ð¶Ð¸Ñ‚ÑŒ" << endl;
 				while (true) {
 					if (_kbhit()) {
 						while (_kbhit()) _getch();
@@ -204,13 +211,13 @@ void addResult(vector<shared_ptr<Competition>>& competitions) {
 				return;
 			}
 			if (typeid(*competition) == typeid(TextCompetition)) {
-				cout << "Ââåäèòå âàøó îöåíêó: ";
+				cout << "Ð’Ð²ÐµÐ´Ð¸Ñ‚Ðµ Ð¾Ñ†ÐµÐ½ÐºÑƒ: ";
 				string text;
 				cin.ignore();
 				getline(cin, text);
 				if (cin.fail()) {
-					cout << "Îøèáêà ââîäà!" << endl;
-					cout << "Íàæìèòå ëþáóþ êíîïêó, ÷òîáû ïðîäîëæèòü" << endl;
+					cout << "ÐžÑˆÐ¸Ð±ÐºÐ° Ð²Ð²Ð¾Ð´Ð°!" << endl;
+					cout << "ÐÐ°Ð¶Ð¼Ð¸Ñ‚Ðµ Ð»ÑŽÐ±ÑƒÑŽ ÐºÐ½Ð¾Ð¿ÐºÑƒ, Ñ‡Ñ‚Ð¾Ð±Ñ‹ Ð¿Ñ€Ð¾Ð´Ð¾Ð»Ð¶Ð¸Ñ‚ÑŒ" << endl;
 					while (true) {
 						if (_kbhit()) {
 							while (_kbhit()) _getch();
@@ -222,8 +229,8 @@ void addResult(vector<shared_ptr<Competition>>& competitions) {
 				}
 				shared_ptr<Result> ptr = make_shared<TextResult>(participant, text);
 				competition->addParticipant(ptr);
-				cout << "Ðåçóëüòàò äîáàâëåí!" << endl;
-				cout << "Íàæìèòå ëþáóþ êíîïêó, ÷òîáû ïðîäîëæèòü" << endl;
+				cout << "ÐžÑˆÐ¸Ð±ÐºÐ° Ð²Ð²Ð¾Ð´Ð°!" << endl;
+				cout << "ÐÐ°Ð¶Ð¼Ð¸Ñ‚Ðµ Ð»ÑŽÐ±ÑƒÑŽ ÐºÐ½Ð¾Ð¿ÐºÑƒ, Ñ‡Ñ‚Ð¾Ð±Ñ‹ Ð¿Ñ€Ð¾Ð´Ð¾Ð»Ð¶Ð¸Ñ‚ÑŒ" << endl;
 				while (true) {
 					if (_kbhit()) {
 						while (_kbhit()) _getch();
@@ -234,8 +241,8 @@ void addResult(vector<shared_ptr<Competition>>& competitions) {
 			}
 		}
 	}
-	cout << "Ñîðåâíîâàíèå íå íàéäåíî!" << endl;
-	cout << "Íàæìèòå ëþáóþ êíîïêó, ÷òîáû ïðîäîëæèòü" << endl;
+	cout << "Ð ÐµÐ·ÑƒÐ»ÑŒÑ‚Ð°Ñ‚ Ð´Ð¾Ð±Ð°Ð²Ð»ÐµÐ½!" << endl;
+	cout << "ÐÐ°Ð¶Ð¼Ð¸Ñ‚Ðµ Ð»ÑŽÐ±ÑƒÑŽ ÐºÐ½Ð¾Ð¿ÐºÑƒ, Ñ‡Ñ‚Ð¾Ð±Ñ‹ Ð¿Ñ€Ð¾Ð´Ð¾Ð»Ð¶Ð¸Ñ‚ÑŒ" << endl;
 	while (true) {
 		if (_kbhit()) {
 			while (_kbhit()) _getch();
@@ -248,20 +255,20 @@ void displayAll(const vector<shared_ptr<Competition>>& competitions) {
 	system("cls");
 	for (const auto& comp : competitions) {
 		if (typeid(*comp) != typeid(TextCompetition)) comp->sortParticipantsByScore();
-		cout << "Ñîðåâíîâàíèå: " << comp->getName() << endl;
+		cout << "Ð¡Ð¾Ñ€ÐµÐ²Ð½Ð¾Ð²Ð°Ð½Ð¸Ðµ: " << comp->getName() << endl;
 		cout << string(120, '-');
-		cout << "| " << setw(5) << left << "Ìåñòî"
-			<< " | " << setw(17) << left << "Ôàìèëèÿ"
-			<< " | " << setw(15) << left << "Èìÿ"
-			<< " | " << setw(15) << left << "Îò÷åñòâî"
-			<< " | " << setw(16) << left << "Ñòðàíà"
-			<< " | " << setw(10) << left << "Âîçðàñò"
-			<< " | " << setw(20) << left << "Ðåçóëüòàò"
+		cout << "| " << setw(5) << left << "ÐœÐµÑÑ‚Ð¾"
+			<< " | " << setw(17) << left << "Ð¤Ð°Ð¼Ð¸Ð»Ð¸Ñ"
+			<< " | " << setw(15) << left << "Ð˜Ð¼Ñ"
+			<< " | " << setw(15) << left << "ÐžÑ‚Ñ‡ÐµÑÑ‚Ð²Ð¾"
+			<< " | " << setw(16) << left << "Ð¡Ñ‚Ñ€Ð°Ð½Ð°"
+			<< " | " << setw(10) << left << "Ð’Ð¾Ð·Ñ€Ð°ÑÑ‚"
+			<< " | " << setw(20) << left << "Ð ÐµÐ·ÑƒÐ»ÑŒÑ‚Ð°Ñ‚"
 			<< " |" << endl;
 		cout << string(120, '-');
 		comp->display();
 	}
-	cout << "Íàæìèòå ëþáóþ êíîïêó, ÷òîáû ïðîäîëæèòü" << endl;
+	cout << "ÐÐ°Ð¶Ð¼Ð¸Ñ‚Ðµ Ð»ÑŽÐ±ÑƒÑŽ ÐºÐ½Ð¾Ð¿ÐºÑƒ, Ñ‡Ñ‚Ð¾Ð±Ñ‹ Ð¿Ñ€Ð¾Ð´Ð¾Ð»Ð¶Ð¸Ñ‚ÑŒ" << endl;
 	while (true) {
 		if (_kbhit()) {
 			while (_kbhit()) _getch();
@@ -272,19 +279,19 @@ void displayAll(const vector<shared_ptr<Competition>>& competitions) {
 
 void displayByName(const vector<shared_ptr<Competition>>& competitions) {
 	system("cls");
-	cout << "| " << setw(30) << left << "Èìÿ ñîðåâíîâàíèÿ" << " |" << endl;
+	cout << "| " << setw(30) << left << "Ð˜Ð¼Ñ ÑÐ¾Ñ€ÐµÐ²Ð½Ð¾Ð²Ð°Ð½Ð¸Ñ" << " |" << endl;
 	cout << string(34, '-') << endl;
 	for (const auto& competition : competitions) {
 		cout << "| " << setw(30) << left << competition->getName() << " |" << endl;
 		cout << string(34, '-') << endl;
 	}
 	string name;
-	cout << "Ââåäèòå èìÿ ñîðåâíîâàíèÿ, êîòîðîå íåîáõîäèìî âûâåñòè íà ýêðàí: ";
+	cout << "Ð’Ð²ÐµÐ´Ð¸Ñ‚Ðµ Ð¸Ð¼Ñ ÑÐ¾Ñ€ÐµÐ²Ð½Ð¾Ð²Ð°Ð½Ð¸Ñ, ÐºÐ¾Ñ‚Ð¾Ñ€Ð¾Ðµ Ð½ÐµÐ¾Ð±Ñ…Ð¾Ð´Ð¸Ð¼Ð¾ Ð²Ñ‹Ð²ÐµÑÑ‚Ð¸: ";
 	cin >> name;
 	if (cin.fail()) {
-		cout << "Îøèáêà ââîäà!" << endl;
+		cout << "ÐžÑˆÐ¸Ð±ÐºÐ° Ð²Ð²Ð¾Ð´Ð°!" << endl;
 		cin.clear();
-		cout << "Íàæìèòå ëþáóþ êíîïêó, ÷òîáû ïðîäîëæèòü" << endl;
+		cout << "ÐÐ°Ð¶Ð¼Ð¸Ñ‚Ðµ Ð»ÑŽÐ±ÑƒÑŽ ÐºÐ½Ð¾Ð¿ÐºÑƒ, Ñ‡Ñ‚Ð¾Ð±Ñ‹ Ð¿Ñ€Ð¾Ð´Ð¾Ð»Ð¶Ð¸Ñ‚ÑŒ" << endl;
 		while (true) {
 			if (_kbhit()) {
 				while (_kbhit()) _getch();
@@ -296,19 +303,19 @@ void displayByName(const vector<shared_ptr<Competition>>& competitions) {
 	for (const auto& comp : competitions) {
 		if (comp->getName() == name) {
 			if (typeid(*comp) != typeid(TextCompetition)) comp->sortParticipantsByScore();
-			cout << "Ñîðåâíîâàíèå: " << name << endl;
+			cout << "Ð¡Ð¾Ñ€ÐµÐ²Ð½Ð²Ð°Ð½Ð¸Ðµ: " << name << endl;
 			cout << string(120, '-');
-			cout << "| " << setw(5) << left << "Ìåñòî"
-				<< " | " << setw(17) << left << "Ôàìèëèÿ"
-				<< " | " << setw(15) << left << "Èìÿ"
-				<< " | " << setw(15) << left << "Îò÷åñòâî"
-				<< " | " << setw(16) << left << "Ñòðàíà"
-				<< " | " << setw(10) << left << "Âîçðàñò"
-				<< " | " << setw(20) << left << "Ðåçóëüòàò"
+			cout << "| " << setw(5) << left << "ÐœÐµÑÑ‚Ð¾"
+				<< " | " << setw(17) << left << "Ð¤Ð°Ð¼Ð¸Ð»Ð¸Ñ"
+				<< " | " << setw(15) << left << "Ð˜Ð¼Ñ"
+				<< " | " << setw(15) << left << "ÐžÑ‚Ñ‡ÐµÑÑ‚Ð²Ð¾"
+				<< " | " << setw(16) << left << "Ð¡Ñ‚Ñ€Ð°Ð½Ð°"
+				<< " | " << setw(10) << left << "Ð’Ð¾Ð·Ñ€Ð°ÑÑ‚"
+				<< " | " << setw(20) << left << "Ð ÐµÐ·ÑƒÐ»ÑŒÑ‚Ð°Ñ‚"
 				<< " |" << endl;
 			cout << string(120, '-');
 			comp->display();
-			cout << "Íàæìèòå ëþáóþ êíîïêó, ÷òîáû ïðîäîëæèòü" << endl;
+			cout << "ÐÐ°Ð¶Ð¼Ð¸Ñ‚Ðµ Ð»ÑŽÐ±ÑƒÑŽ ÐºÐ½Ð¾Ð¿ÐºÑƒ, Ñ‡Ñ‚Ð¾Ð±Ñ‹ Ð¿Ñ€Ð¾Ð´Ð¾Ð»Ð¶Ð¸Ñ‚ÑŒ" << endl;
 			while (true) {
 				if (_kbhit()) {
 					while (_kbhit()) _getch();
@@ -318,8 +325,8 @@ void displayByName(const vector<shared_ptr<Competition>>& competitions) {
 			return;
 		}
 	}
-	cout << "Ñîðåâíîâàíèå íå íàéäåíî!" << endl;
-	cout << "Íàæìèòå ëþáóþ êíîïêó, ÷òîáû ïðîäîëæèòü" << endl;
+	cout << "ÐžÑˆÐ¸Ð±ÐºÐ° Ð²Ð²Ð¾Ð´Ð°!" << endl;
+	cout << "ÐÐ°Ð¶Ð¼Ð¸Ñ‚Ðµ Ð»ÑŽÐ±ÑƒÑŽ ÐºÐ½Ð¾Ð¿ÐºÑƒ, Ñ‡Ñ‚Ð¾Ð±Ñ‹ Ð¿Ñ€Ð¾Ð´Ð¾Ð»Ð¶Ð¸Ñ‚ÑŒ" << endl;
 	while (true) {
 		if (_kbhit()) {
 			while (_kbhit()) _getch();
@@ -333,21 +340,21 @@ void displayTimeComp(const vector<shared_ptr<Competition>>& competitions) {
 	for (const auto& comp : competitions) {
 		if (typeid(*comp) == typeid(TimeCompetition)) {
 			comp->sortParticipantsByScore();
-			cout << "Ñîðåâíîâàíèå: " << comp->getName() << endl;
+			cout << "Ð¡Ð¾Ñ€ÐµÐ²Ð½Ð¾Ð²Ð°Ð½Ð¸Ðµ: " << comp->getName() << endl;
 			cout << string(120, '-');
-			cout << "| " << setw(5) << left << "Ìåñòî"
-				<< " | " << setw(17) << left << "Ôàìèëèÿ"
-				<< " | " << setw(15) << left << "Èìÿ"
-				<< " | " << setw(15) << left << "Îò÷åñòâî"
-				<< " | " << setw(16) << left << "Ñòðàíà"
-				<< " | " << setw(10) << left << "Âîçðàñò"
-				<< " | " << setw(20) << left << "Ðåçóëüòàò"
+			cout << "| " << setw(5) << left << "ÐœÐµÑÑ‚Ð¾"
+				<< " | " << setw(17) << left << "Ð¤Ð°Ð¼Ð¸Ð»Ð¸Ñ"
+				<< " | " << setw(15) << left << "Ð˜Ð¼Ñ"
+				<< " | " << setw(15) << left << "ÐžÑ‚Ñ‡ÐµÑÑ‚Ð²Ð¾"
+				<< " | " << setw(16) << left << "Ð¡Ñ‚Ñ€Ð°Ð½Ð°"
+				<< " | " << setw(10) << left << "Ð’Ð¾Ð·Ñ€Ð°ÑÑ‚"
+				<< " | " << setw(20) << left << "Ð ÐµÐ·ÑƒÐ»ÑŒÑ‚Ð°Ñ‚"
 				<< " |" << endl;
 			cout << string(120, '-');
 			comp->display();
 		}
 	}
-	cout << "Íàæìèòå ëþáóþ êíîïêó, ÷òîáû ïðîäîëæèòü" << endl;
+	cout << "ÐÐ°Ð¶Ð¼Ð¸Ñ‚Ðµ Ð»ÑŽÐ±ÑƒÑŽ ÐºÐ½Ð¾Ð¿ÐºÑƒ, Ñ‡Ñ‚Ð¾Ð±Ñ‹ Ð¿Ñ€Ð¾Ð´Ð¾Ð»Ð¶Ð¸Ñ‚ÑŒ" << endl;
 	while (true) {
 		if (_kbhit()) {
 			while (_kbhit()) _getch();
@@ -361,21 +368,21 @@ void displayScoreComp(vector<shared_ptr<Competition>>& competitions) {
 	for (const auto& comp : competitions) {
 		if (typeid(*comp) == typeid(ScoreCompetition)) {
 			comp->sortParticipantsByScore();
-			cout << "Ñîðåâíîâàíèå: " << comp->getName() << endl;
+			cout << "Ð¡Ð¾Ñ€ÐµÐ²Ð½Ð¾Ð²Ð°Ð½Ð¸Ðµ: " << comp->getName() << endl;
 			cout << string(120, '-');
-			cout << "| " << setw(5) << left << "Ìåñòî"
-				<< " | " << setw(17) << left << "Ôàìèëèÿ"
-				<< " | " << setw(15) << left << "Èìÿ"
-				<< " | " << setw(15) << left << "Îò÷åñòâî"
-				<< " | " << setw(16) << left << "Ñòðàíà"
-				<< " | " << setw(10) << left << "Âîçðàñò"
-				<< " | " << setw(20) << left << "Ðåçóëüòàò"
+			cout << "| " << setw(5) << left << "ÐœÐµÑÑ‚Ð¾"
+				<< " | " << setw(17) << left << "Ð¤Ð°Ð¼Ð¸Ð»Ð¸Ñ"
+				<< " | " << setw(15) << left << "Ð˜Ð¼Ñ"
+				<< " | " << setw(15) << left << "ÐžÑ‚Ñ‡ÐµÑÑ‚Ð²Ð¾"
+				<< " | " << setw(16) << left << "Ð¡Ñ‚Ñ€Ð°Ð½Ð°"
+				<< " | " << setw(10) << left << "Ð’Ð¾Ð·Ñ€Ð°ÑÑ‚"
+				<< " | " << setw(20) << left << "Ð ÐµÐ·ÑƒÐ»ÑŒÑ‚Ð°Ñ‚"
 				<< " |" << endl;
 			cout << string(120, '-');
 			comp->display();
 		}
 	}
-	cout << "Íàæìèòå ëþáóþ êíîïêó, ÷òîáû ïðîäîëæèòü" << endl;
+	cout << "ÐÐ°Ð¶Ð¼Ð¸Ñ‚Ðµ Ð»ÑŽÐ±ÑƒÑŽ ÐºÐ½Ð¾Ð¿ÐºÑƒ, Ñ‡Ñ‚Ð¾Ð±Ñ‹ Ð¿Ñ€Ð¾Ð´Ð¾Ð»Ð¶Ð¸Ñ‚ÑŒ" << endl;
 	while (true) {
 		if (_kbhit()) {
 			while (_kbhit()) _getch();
@@ -389,21 +396,21 @@ void displayTextComp(vector<shared_ptr<Competition>>& competitions) {
 	for (const auto& comp : competitions) {
 		if (typeid(*comp) == typeid(TextCompetition)) {
 			comp->sortParticipantsByScore();
-			cout << "Ñîðåâíîâàíèå: " << comp->getName() << endl;
+			cout << "Ð¡Ð¾Ñ€ÐµÐ²Ð½Ð¾Ð²Ð°Ð½Ð¸Ðµ: " << comp->getName() << endl;
 			cout << string(120, '-');
-			cout << "| " << setw(5) << left << "Ìåñòî"
-				<< " | " << setw(17) << left << "Ôàìèëèÿ"
-				<< " | " << setw(15) << left << "Èìÿ"
-				<< " | " << setw(15) << left << "Îò÷åñòâî"
-				<< " | " << setw(16) << left << "Ñòðàíà"
-				<< " | " << setw(10) << left << "Âîçðàñò"
-				<< " | " << setw(20) << left << "Ðåçóëüòàò"
+			cout << "| " << setw(5) << left << "ÐœÐµÑÑ‚Ð¾"
+				<< " | " << setw(17) << left << "Ð¤Ð°Ð¼Ð¸Ð»Ð¸Ñ"
+				<< " | " << setw(15) << left << "Ð˜Ð¼Ñ"
+				<< " | " << setw(15) << left << "ÐžÑ‚Ñ‡ÐµÑÑ‚Ð²Ð¾"
+				<< " | " << setw(16) << left << "Ð¡Ñ‚Ñ€Ð°Ð½Ð°"
+				<< " | " << setw(10) << left << "Ð’Ð¾Ð·Ñ€Ð°ÑÑ‚"
+				<< " | " << setw(20) << left << "Ð ÐµÐ·ÑƒÐ»ÑŒÑ‚Ð°Ñ‚"
 				<< " |" << endl;
 			cout << string(120, '-');
 			comp->display();
 		}
 	}
-	cout << "Íàæìèòå ëþáóþ êíîïêó, ÷òîáû ïðîäîëæèòü" << endl;
+	cout << "ÐÐ°Ð¶Ð¼Ð¸Ñ‚Ðµ Ð»ÑŽÐ±ÑƒÑŽ ÐºÐ½Ð¾Ð¿ÐºÑƒ, Ñ‡Ñ‚Ð¾Ð±Ñ‹ Ð¿Ñ€Ð¾Ð´Ð¾Ð»Ð¶Ð¸Ñ‚ÑŒ" << endl;
 	while (true) {
 		if (_kbhit()) {
 			while (_kbhit()) _getch();
@@ -415,18 +422,18 @@ void displayTextComp(vector<shared_ptr<Competition>>& competitions) {
 void display(vector<shared_ptr<Competition>>& competitions) {
 	system("cls");
 	int choice;
-	cout << "×òî âûâåñòè?" << endl;
-	cout << "1. Âûâåñòè âñå" << endl;
-	cout << "2. Âûâåñòè êîíêðåòíîå ñîðåâíîâàíèå" << endl;
-	cout << "3. Âûâåñòè âñå ñîðîâíîâàíèÿ ñ òèïîì îöåíêè \"Âðåìÿ\"" << endl;
-	cout << "4. Âûâåñòè âñå ñîðîâíîâàíèÿ ñ òèïîì îöåíêè \"Î÷êè\"" << endl;
-	cout << "5. Âûâåñòè âñå ñîðîâíîâàíèÿ ñ òèïîì îöåíêè \"Òåêñò\"" << endl;
-	cout << "0. Âåðíóòüñÿ íàçàä" << endl;
-	cout << "Âàø âûáîð: " << endl;
+	cout << "Ð§Ñ‚Ð¾ Ð²Ñ‹Ð²ÐµÑÑ‚Ð¸?" << endl;
+	cout << "1. Ð’Ñ‹Ð²ÐµÑÑ‚Ð¸ Ð²ÑÑ‘" << endl;
+	cout << "2. Ð’Ñ‹Ð²ÐµÑÑ‚Ð¸ ÐºÐ¾Ð½ÐºÑ€ÐµÑ‚Ð½Ð¾Ðµ ÑÐ¾Ñ€ÐµÐ²Ð½Ð¾Ð²Ð°Ð½Ð¸Ðµ" << endl;
+	cout << "3. Ð’Ñ‹Ð²ÐµÑÑ‚Ð¸ Ð²ÑÐµ ÑÐ¾Ñ€ÐµÐ²Ð½Ð¾Ð°Ð²Ð½Ð¸Ñ Ñ Ñ‚Ð¸Ð¿Ð¾Ð¼ Ð¾Ñ†ÐµÐ½Ð¸Ð²Ð°Ð½Ð¸Ñ \"Ð’Ñ€ÐµÐ¼Ñ\"" << endl;
+	cout << "4. Ð’Ñ‹Ð²ÐµÑÑ‚Ð¸ Ð²ÑÐµ ÑÐ¾Ñ€ÐµÐ²Ð½Ð¾Ð°Ð²Ð½Ð¸Ñ Ñ Ñ‚Ð¸Ð¿Ð¾Ð¼ Ð¾Ñ†ÐµÐ½Ð¸Ð²Ð°Ð½Ð¸Ñ \"ÐžÑ‡ÐºÐ¸\"" << endl;
+	cout << "5. Ð’Ñ‹Ð²ÐµÑÑ‚Ð¸ Ð²ÑÐµ ÑÐ¾Ñ€ÐµÐ²Ð½Ð¾Ð°Ð²Ð½Ð¸Ñ Ñ Ñ‚Ð¸Ð¿Ð¾Ð¼ Ð¾Ñ†ÐµÐ½Ð¸Ð²Ð°Ð½Ð¸Ñ \"Ð¢ÐµÐºÑÑ‚\"" << endl;
+	cout << "0. Ð’ÐµÑ€Ð½ÑƒÑ‚ÑÑ Ð½Ð°Ð·Ð°Ð´" << endl;
+	cout << "Ð’Ð°Ñˆ Ð²Ñ‹Ð±Ð¾Ñ€: " << endl;
 	while (true) {
 		cin >> choice;
 		if (cin.fail()) {
-			cout << "Îøèáêà ââîäà!" << endl;
+			cout << "ÐžÑˆÐ¸Ð±ÐºÐ° Ð²Ð²Ð¾Ð´Ð°! ÐŸÐ¾Ð¿Ñ€Ð¾Ð±ÑƒÐ¹Ñ‚Ðµ ÐµÑ‰Ñ‘ Ñ€Ð°Ð·!" << endl;
 			cin.clear();
 			cin.ignore(1000000, '\n');
 			continue;
@@ -458,18 +465,18 @@ void display(vector<shared_ptr<Competition>>& competitions) {
 
 void makeReport(vector<shared_ptr<Competition>>& competitions) {
 	system("cls");
-	cout << "| " << setw(30) << left << "Èìÿ ñîðåâíîâàíèÿ" << " |" << endl;
+	cout << "| " << setw(30) << left << "Ð˜Ð¼Ñ ÑÐ¾Ñ€ÐµÐ²Ð½Ð¾Ð²Ð°Ð½Ð¸Ñ" << " |" << endl;
 	cout << string(34, '-') << endl;
 	for (const auto& competition : competitions) {
 		cout << "| " << setw(30) << left << competition->getName() << " |" << endl;
 		cout << string(34, '-') << endl;
 	}
 	string name;
-	cout << "Ââåäèòå èìÿ ñîðåâíîâàíèÿ, äëÿ êîòîðîãî íåîáõîäèìî ñîñòàâèòü îò÷¸ò: ";
+	cout << "Ð’Ð²ÐµÐ´Ð¸Ñ‚Ðµ Ð¸Ð¼Ñ ÑÐ¾Ñ€ÐµÐ²Ð½Ð¾Ð²Ð°Ð½Ð¸Ñ, Ð´Ð»Ñ ÐºÐ¾Ñ‚Ð¾Ñ€Ð¾Ð³Ð¾ Ð½ÐµÐ¾Ð±Ñ…Ð¾Ð´Ð¸Ð¼Ð¾ ÑÐ¾ÑÑ‚Ð°Ð²Ð¸Ñ‚ÑŒ Ð¾Ñ‚Ñ‡Ñ‘Ñ‚: ";
 	cin >> name;
 	if (cin.fail()) {
-		cout << "Îøèáêà ââîäà!" << endl;
-		cout << "Íàæìèòå ëþáóþ êíîïêó, ÷òîáû ïðîäîëæèòü" << endl;
+		cout << "ÐžÑˆÐ¸Ð±ÐºÐ° Ð²Ð²Ð¾Ð´Ð°!" << endl;
+		cout << "ÐÐ°Ð¶Ð¼Ð¸Ñ‚Ðµ Ð»ÑŽÐ±ÑƒÑŽ ÐºÐ½Ð¾Ð¿ÐºÑƒ, Ñ‡Ñ‚Ð¾Ð±Ñ‹ Ð¿Ñ€Ð¾Ð´Ð¾Ð»Ð¶Ð¸Ñ‚ÑŒ" << endl;
 		while (true) {
 			if (_kbhit()) {
 				while (_kbhit()) _getch();
@@ -479,21 +486,21 @@ void makeReport(vector<shared_ptr<Competition>>& competitions) {
 		cin.clear();
 		return;
 	}
-	string filename_and_path = "Îò÷¸òû\\Îò÷¸ò ñîðåâíîâàíèÿ " + name + ".txt";
+	string filename_and_path = "ÐžÑ‚Ñ‡Ñ‘Ñ‚Ñ‹\\ÐžÑ‚Ñ‡Ñ‘Ñ‚ ÑÐ¾Ñ€ÐµÐ²Ð½Ð¾Ð²Ð°Ð½Ð¸Ñ " + name + ".txt";
 	ofstream file(filename_and_path);
 	for (const auto& comp : competitions) {
 		int i = 1;
 		if (comp->getName() == name) {
 			if (typeid(*comp) != typeid(TextCompetition)) comp->sortParticipantsByScore();
-			file << "Ñîðåâíîâàíèå: " << name << endl;
+			file << "Ð¡Ð¾Ñ€ÐµÐ²Ð½Ð¾Ð²Ð°Ð½Ð¸Ðµ: " << name << endl;
 			file << string(120, '-') << endl;
-			file << "| " << setw(5) << left << "Ìåñòî"
-				<< " | " << setw(17) << left << "Ôàìèëèÿ"
-				<< " | " << setw(15) << left << "Èìÿ"
-				<< " | " << setw(15) << left << "Îò÷åñòâî"
-				<< " | " << setw(16) << left << "Ñòðàíà"
-				<< " | " << setw(10) << left << "Âîçðàñò"
-				<< " | " << setw(20) << left << "Ðåçóëüòàò"
+			file << "| " << setw(5) << left << "ÐœÐµÑÑ‚Ð¾"
+				<< " | " << setw(17) << left << "Ð¤Ð°Ð¼Ð¸Ð»Ð¸Ñ"
+				<< " | " << setw(15) << left << "Ð˜Ð¼Ñ"
+				<< " | " << setw(15) << left << "ÐžÑ‚Ñ‡ÐµÑÑ‚Ð²Ð¾"
+				<< " | " << setw(16) << left << "Ð¡Ñ‚Ñ€Ð°Ð½Ð°"
+				<< " | " << setw(10) << left << "Ð’Ð¾Ð·Ñ€Ð°ÑÑ‚"
+				<< " | " << setw(20) << left << "Ð ÐµÐ·ÑƒÐ»ÑŒÑ‚Ð°Ñ‚"
 				<< " |" << endl;
 			file << string(120, '-') << endl;
 			comp->outputToFile(file);
@@ -502,8 +509,8 @@ void makeReport(vector<shared_ptr<Competition>>& competitions) {
 			string temp;
 			while (tempIn >> temp) {
 				if (temp == name) {
-					cout << "Îò÷¸ò ñîçäàí!" << endl;
-					cout << "Íàæìèòå ëþáóþ êíîïêó, ÷òîáû ïðîäîëæèòü" << endl;
+					cout << "ÐžÑˆÐ¸Ð±ÐºÐ° Ð²Ð²Ð¾Ð´Ð°!" << endl;
+					cout << "ÐÐ°Ð¶Ð¼Ð¸Ñ‚Ðµ Ð»ÑŽÐ±ÑƒÑŽ ÐºÐ½Ð¾Ð¿ÐºÑƒ, Ñ‡Ñ‚Ð¾Ð±Ñ‹ Ð¿Ñ€Ð¾Ð´Ð¾Ð»Ð¶Ð¸Ñ‚ÑŒ" << endl;
 					while (true) {
 						if (_kbhit()) {
 							while (_kbhit()) _getch();
@@ -517,8 +524,8 @@ void makeReport(vector<shared_ptr<Competition>>& competitions) {
 			ofstream tempOut("temp\\competitions_names.txt", ios::app);
 			tempOut << name << endl;
 			tempOut.close();
-			cout << "Îò÷¸ò ñîçäàí!" << endl;
-			cout << "Íàæìèòå ëþáóþ êíîïêó, ÷òîáû ïðîäîëæèòü" << endl;
+			cout << "ÐžÑ‚Ñ‡Ñ‘Ñ‚ ÑÐ¾Ð·Ð´Ð°Ð½!" << endl;
+			cout << "ÐÐ°Ð¶Ð¼Ð¸Ñ‚Ðµ Ð»ÑŽÐ±ÑƒÑŽ ÐºÐ½Ð¾Ð¿ÐºÑƒ, Ñ‡Ñ‚Ð¾Ð±Ñ‹ Ð¿Ñ€Ð¾Ð´Ð¾Ð»Ð¶Ð¸Ñ‚ÑŒ" << endl;
 			while (true) {
 				if (_kbhit()) {
 					while (_kbhit()) _getch();
@@ -530,108 +537,8 @@ void makeReport(vector<shared_ptr<Competition>>& competitions) {
 	}
 }
 
-void getDataFromFile(vector<shared_ptr<Competition>>& competitions) {
-	ifstream temp("temp\\competitions_names.txt");
-	bool filter = false, isTime = false, isScore = false;
-	vector<string> names;
-	string name, line;
-	while (temp >> name) names.push_back(name);
-	temp.close();
-	for (const auto& n : names) {
-		shared_ptr<TimeCompetition> timeComp = make_shared<TimeCompetition>(n);
-		shared_ptr<ScoreCompetition> scoreComp = make_shared<ScoreCompetition>(n);
-		shared_ptr<TextCompetition> textComp = make_shared<TextCompetition>(n);
-		int minutes = 100, seconds = 100, milliseconds = 1000;
-		double scr;
-		string filename_and_path = "Îò÷¸òû\\Îò÷¸ò ñîðåâíîâàíèÿ " + n + ".txt";
-		ifstream in(filename_and_path);
-		while (in) {
-			if (filter && line[0] != '-') {
-				stringstream ss(line);
-				string secondName, firstName, surname, country, score;
-				int age;
-				ss >> secondName >> firstName >> surname >> country >> age >> score;
-				Participant part(secondName, firstName, surname, country, age);
-				int count = 0;
-				for (const auto& ch : score) {
-					if (ch == ':') count++;
-				}
-				if (count == 2) {
-					isTime = true;
-					count = 0;
-					string temp = "";
-					for (int i = 0; i < score.size() + 1; i++) {
-						if (score[i] == ':' && count == 0) {
-							count++;
-							try {
-								minutes = stoi(temp);
-							}
-							catch (const exception& e) {
-								isTime = false;
-								break;
-							}
-							temp = "";
-							continue;
-						}
-						else if (score[i] == ':' && count == 1) {
-							count++;
-							try {
-								seconds = stoi(temp);
-							}
-							catch (const exception& e) {
-								isTime = false;
-								break;
-							}
-							temp = "";
-							continue;
-						}
-						else if (count == 2 && i == score.size()) {
-							try {
-								milliseconds = stoi(temp);
-							}
-							catch (const exception& e) {
-								isTime = false;
-								break;
-							}
-							temp = "";
-							continue;
-						}
-						temp.push_back(score[i]);
-					}
-				}
-				else {
-					try {
-						scr = stod(score);
-						isScore = true;
-					}
-					catch (const exception& e) {
-						isScore = false;
-					}
-				}
-				if (isTime) {
-					Time time(minutes, seconds, milliseconds);
-					shared_ptr<TimeResult> res = make_shared<TimeResult>(part, time);
-					timeComp->addParticipant(res);
-					competitions.push_back(timeComp);
-				}
-				if (isScore) {
-					shared_ptr<ScoreResult> res = make_shared<ScoreResult>(part, scr);
-					scoreComp->addParticipant(res);
-					competitions.push_back(scoreComp);
-				}
-			}
-			getline(in, line);
-			if (line[0] == '|') {
-				line = filterLine(line);
-				filter = true;
-			}
-		}
-	}
-}
-
 void JudgeSystem(const string& username) {
 	vector<shared_ptr<Competition>> competitions;
-	getDataFromFile(competitions);
 	while (true) {
 		ShowMenu(username);
 		int choice;
@@ -639,7 +546,7 @@ void JudgeSystem(const string& username) {
 		if (cin.fail()) {
 			cin.clear();
 			cin.ignore(100000000, '\n');
-			cout << "Îøèáêà ââîäà!" << endl;
+			cout << "ÐžÑˆÐ¸Ð±ÐºÐ° Ð²Ð²Ð¾Ð´Ð°!" << endl;
 			continue;
 		}
 		switch (choice) {
@@ -655,13 +562,10 @@ void JudgeSystem(const string& username) {
 		case 4:
 			makeReport(competitions);
 			break;
-		case 5:
-			getDataFromFile(competitions);
-			break;
 		case 0:
 			system("cls");
-			cout << "Äî ñâèäàíèÿ, " << username << endl;
-			cout << "Íàæìèòå ëþáóþ êíîïêó, ÷òîáû ïðîäîëæèòü" << endl;
+			cout << "Ð”Ð¾ ÑÐ²Ð¸Ð´Ð°Ð½Ð¸Ñ, " << username << "!" << endl;
+			cout << "ÐÐ°Ð¶Ð¼Ð¸Ñ‚Ðµ Ð»ÑŽÐ±ÑƒÑŽ ÐºÐ½Ð¾Ð¿ÐºÑƒ, Ñ‡Ñ‚Ð¾Ð±Ñ‹ Ð¿Ñ€Ð¾Ð´Ð¾Ð»Ð¶Ð¸Ñ‚ÑŒ" << endl;
 			while (true) {
 				if (_kbhit()) {
 					while (_kbhit()) _getch();
@@ -670,7 +574,7 @@ void JudgeSystem(const string& username) {
 			}
 			return;
 		default:
-			cout << "Íåâåðíûé âûáîð!" << endl;
+			cout << "ÐÐµÐ²ÐµÑ€Ð½Ñ‹Ð¹ Ð²Ñ‹Ð±Ð¾Ñ€!" << endl;
 			break;
 		}
 	}

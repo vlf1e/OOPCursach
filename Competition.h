@@ -1,4 +1,4 @@
-#pragma once
+п»ї#pragma once
 #include <iostream>
 #include <algorithm>
 #include <string>
@@ -132,7 +132,7 @@ public:
 			}), results.end());
 	}
 	void sortParticipantsByScore() override {
-		cout << "Текстовая форма оценивания не подлежит сортировке!" << endl;
+		cout << "!" << endl;
 		return;
 	}
 	void display() override {
