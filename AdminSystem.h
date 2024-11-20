@@ -7,6 +7,7 @@
 #include <memory>
 #include <conio.h>
 #include "User.h"
+#include "InputWithCheck.h"
 
 using namespace std;
 
@@ -15,7 +16,8 @@ void showMenu(const string& username) {
 	cout << "Добро пожаловать, " << username << '!' << endl;
 	cout << "1. Добавить пользователя" << endl;
 	cout << "2. Удалить пользователя" << endl;
-	cout << "3. Посмотреть пользователей и их данные" << endl;
+	cout << "3. Изменить пользователя" << endl;
+	cout << "4. Посмотреть пользователей и их данные" << endl;
 	cout << "0. Выход" << endl;
 }
 
@@ -26,9 +28,8 @@ void addUser() {
 	char ch;
 	int choice;
 	cout << "Введите логин: ";
-	cin >> login;
+	Input<string>::InputWithCheck(login);
 	cout << "Введите пароль: ";
-	cin.clear();
 	while ((ch = _getch()) != '\r') {
 		password.push_back(ch);
 		cout << '*';
@@ -38,7 +39,7 @@ void addUser() {
 	cout << "1. Администратор" << endl;
 	cout << "2. Судья" << endl;
 	cout << "3. Гость" << endl;
-	cin >> choice;
+	Input<int>::InputWithCheck(choice);
 	switch (choice)
 	{
 	case 1:
@@ -80,13 +81,7 @@ void deleteUser(const string& username) {
 		file2 << *usr << endl;
 	}
 	cout << "Удаление успешно!" << endl;
-	cout << "Нажмите любую кнопку, чтобы продолжить" << endl;
-	while (true) {
-		if (_kbhit()) {
-			while (_kbhit()) _getch();
-			break;
-		}
-	}
+	WaitButton();
 }
 
 void viewUsers() {
@@ -105,13 +100,7 @@ void viewUsers() {
 			<< " | " << setw(20) << usr->getType() << " |" << endl;
 		cout << string(47, '-') << endl;
 	}
-	cout << "Нажмите любую кнопку, чтобы продолжить" << endl;
-	while (true) {
-		if (_kbhit()) {
-			while (_kbhit()) _getch();
-			break;
-		}
-	}
+	WaitButton();
 	file.close();
 }
 
@@ -133,13 +122,7 @@ void viewAdmins() {
 			cout << string(47, '-') << endl;
 		}
 	}
-	cout << "Нажмите любую кнопку, чтобы продолжить" << endl;
-	while (true) {
-		if (_kbhit()) {
-			while (_kbhit()) _getch();
-			break;
-		}
-	}
+	WaitButton();
 	file.close();
 }
 
@@ -179,13 +162,7 @@ void view() {
 	cout << "3. Вывести судей" << endl;
 	cout << "0. Вернуться назад" << endl;
 	while (true) {
-		cin >> choice;
-		if (cin.fail()) {
-			cout << "Ошибка ввода!" << endl;
-			cin.clear();
-			cin.ignore(10000000, '\n');
-			continue;
-		}
+		Input<int>::InputWithCheck(choice);
 		switch (choice)
 		{
 		case 1:
@@ -205,17 +182,58 @@ void view() {
 	}
 }
 
+void editUser() {
+	system("cls");
+	cout << "Введите имя пользователя, которого вы хотите изменить" << endl;
+	viewUsers();
+	ifstream file("Users.txt");
+	vector<unique_ptr<User>> users;
+	User user;
+	while (file >> user) {
+		users.push_back(make_unique<User>(user));
+	}
+	string username;
+	for (const auto& usr : users) {
+		if (usr->getLogin() == username) {
+			string login, password;
+			cout << "Введите имя пользователя" << endl;
+			Input<string>::InputWithCheck(login);
+			usr->setLogin(login);
+			cout << "Введите новый пароль" << endl;
+			Input<string>::InputWithCheck(password);
+			usr->setPassword(password);
+			cout << "Оставить тип учетной записи?" << endl;
+			cout << "1. Да" << endl;
+			cout << "2. Нет" << endl;
+			int choice2;
+			while (true) {
+				Input<int>::InputWithCheck(choice2);
+				if (choice2 == 2) {
+					int choice3;
+					while (true) {
+						cout << "Выберите роль" << endl;
+						cout << "1. Администратор" << endl;
+						cout << "2. " << endl;
+						cout << "Ваш выбор: ";
+						Input<int>::InputWithCheck(choice3);
+						switch (choice3)
+						{
+						case 1: user.setType("Администратор"); break;
+						case 2: user.setType("Судья"); break;
+						default: cout << "Ошибка ввода! Попробуйте ещё раз!" << endl; break;
+						}
+					}
+				}
+			}
+		}
+	}
+}
+
 void AdminSystem(const string& username) {
 	int choice;
 	while (true) {
 		showMenu(username);
-		cin >> choice;
-		if (cin.fail()) {
-			cin.clear();
-			cin.ignore(100000000, '\n');
-			cout << "Ошибка ввода!" << endl;
-			continue;
-		}
+		Input<int>::InputWithCheck(choice);
 		switch (choice)
 		{
 		case 1:
@@ -224,30 +242,30 @@ void AdminSystem(const string& username) {
 		case 2:
 		{
 			system("cls");
+			viewUsers();
 			string username;
 			cout << "Введите имя пользователя, которого вы хотите удалить" << endl;
-			cin >> username;
+			Input<string>::InputWithCheck(username);
 			deleteUser(username);
 			break;
 		}
-			
 		case 3:
+		{
+			editUser();
+			break;
+		}
+		case 4:
 		{
 			view();
 			break;
 		}	
 		case 0:
 			cout << "До свидания, " << username << endl;
-			cout << "Нажмите любую кнопку, чтобы продолжить" << endl;
-			while (true) {
-				if (_kbhit()) {
-					while (_kbhit()) _getch();
-					break;
-				}
-			}
+			WaitButton();
 			return;
 		default:
 			cout << "Ошибка ввода!" << endl;
+			WaitButton();
 			break;
 		}
 	}

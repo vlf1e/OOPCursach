@@ -134,6 +134,7 @@
     <ClInclude Include="AdminSystem.h" />
     <ClInclude Include="Competition.h" />
     <ClInclude Include="GuestSystem.h" />
+    <ClInclude Include="InputWithCheck.h" />
     <ClInclude Include="JudgeSystem.h" />
     <ClInclude Include="LineWrapping.h" />
     <ClInclude Include="Participant.h" />

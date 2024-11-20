@@ -4,6 +4,7 @@
 #include <fstream>
 #include <string>
 #include <conio.h>
+#include "InputWithCheck.h"
 
 using namespace std;
 
@@ -26,18 +27,12 @@ void viewCompetitions() {
 	}
 	temp.close();
 	cout << "Введите имя соревнования, которое необходимо вывести" << endl;
-	cin >> name;
+	Input<string>::InputWithCheck(name);
 	filename_and_path = "Отчёты\\Отчёт соревнования " + name + ".txt";
 	ifstream file(filename_and_path);
 	if (!file) cout << "Ошибка чтения файла!" << endl;
 	cout << file.rdbuf();
-	cout << "Нажмите любую кнопку, чтобы продолжить" << endl;
-	while (true) {
-		if (_kbhit()) {
-			while (_kbhit()) _getch();
-			break;
-		}
-	}
+	WaitButton();
 	return;
 
 }
@@ -45,7 +40,7 @@ void GuestSystem() {
 	int choice;
 	while (true) {
 		ShowGuestMenu();
-		cin >> choice;
+		Input<int>::InputWithCheck(choice);
 		switch (choice)
 		{
 		case 1:

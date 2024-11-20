@@ -2,6 +2,7 @@
 #include "JudgeSystem.h"
 #include "AdminSystem.h"
 #include "GuestSystem.h"
+#include "InputWithCheck.h"
 #include "User.h"
 #include <iostream>
 #include <fstream>
@@ -44,82 +45,76 @@ void showProgramMenu() {
 	cout << "Ваш выбор: ";
 }
 
+void loginUser(vector<unique_ptr<User>>& users, const string& username) {
+	for (const auto& user : users) {
+		if (user->getLogin() == username) {
+			string password = "";
+			char ch;
+			while (true) {
+				cout << "Введите пароль: ";
+				while ((ch = _getch()) != '\r') {
+					password.push_back(ch);
+					cout << '*';
+				}
+				if (user->checkpassword(password)) {
+					if (user->getType() == "Администратор") {
+						AdminSystem(user->getLogin());
+						return;
+					}
+					if (user->getType() == "Судья") {
+						JudgeSystem(user->getLogin());
+						return;
+					}
+				}
+				else {
+					system("cls");
+					cout << "Неверный пароль!";
+					WaitButton();
+				}
+			}
+		}
+	}
+	cout << "Пользователь с таким логином не найден";
+}
+
 int main()
 {
-	setlocale(LC_ALL, "");
+	SetConsoleCP(1251);
+	SetConsoleOutputCP(1251);
 	vector<unique_ptr<User>> users;
-	User user;
+	User user, Admin("Admin", "Admin123", "Администратор");
+	users.push_back(make_unique<User>(Admin));
 	ifstream file("Users.txt");
 	while (file >> user) {
 		users.push_back(make_unique<User>(user));
 	}
 	int choice;
 	while (true) {
+		system("cls");
 		showProgramMenu();
-		cin >> choice;
-		if (cin.fail()) {
-			cin.clear();
-			cin.ignore(100000000, '\n');
-			cout << "Ошибка ввода!" << endl;
-			cout << "Нажмите любую кнопку, чтобы продолжить" << endl;
-			while (true) {
-				if (_kbhit()) {
-					while (_kbhit()) _getch();
-					break;
-				}
-			}
-			continue;
-		}
+		Input<int>::InputWithCheck(choice);
 		switch (choice)
 		{
 		case 1:
 		{
 			system("cls");
-			string login, password = "";
-			cout << "Введите логин" << endl;
-			cin >> login;
-			if (login != "Guest") {
-				bool found = 0;
-				for (const auto& usr : users) {
-					if (usr->getLogin() == login) {
-						found = 1;
-						while (true) {
-							char ch;
-							cout << "Введите пароль: " << endl;
-							while ((ch = _getch()) != '\r') {
-								password.push_back(ch);
-								cout << '*';
-							}
-							cout << endl;
-							if (usr->checkpassword(password)) {
-								if (usr->getType() == "Администратор") {
-									AdminSystem(usr->getLogin());
-									break;
-								}
-								else if (usr->getType() == "Судья") {
-									JudgeSystem(usr->getLogin());
-									break;
-								}
-								else return 0;
-							}
-							else {
-								password = "";
-								cout << "Неверный пароль!" << endl;
-							}
-						}
-					}
-				}
-				if (!found) cout << "Неверный логин!" << endl;
-			}
-			continue;
+			string username;
+			cout << "Введите логин:" << endl;
+			Input<string>::InputWithCheck(username);
+			loginUser(users, username);
+			break;
 		}
 		case 2:
+		{
 			GuestSystem();
 			break;
+		}
 		case 0:
+		{
 			system("cls");
 			cout << "До свидания!";
 			return 0;
+		}
 		default:
 			system("cls");
 			cout << "Ошибка ввода!" << endl;

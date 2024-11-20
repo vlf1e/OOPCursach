@@ -4,6 +4,8 @@
 #include <string>
 #include <memory>
 #include <vector>
+#include <any>
+#include "Time.h"
 #include "Result.h"
 
 using namespace std;
@@ -42,7 +44,9 @@ public:
 	void sortParticipantsByScore() override {
 		sort(results.begin(), results.end(),
 			[](const shared_ptr<TimeResult>& r1, const shared_ptr<TimeResult>& r2) {
-				return r1 > r2;
+				Time t1 = any_cast<Time>(r1->getResult());
+				Time t2 = any_cast<Time>(r2->getResult());
+				return t1 > t2;
 			});
 	}
 	void display() override {
@@ -88,7 +92,9 @@ public:
 	void sortParticipantsByScore() override {
 		sort(results.begin(), results.end(),
 			[](const shared_ptr<ScoreResult>& r1, const shared_ptr<ScoreResult>& r2) {
-				return r1 > r2;
+				double score1 = any_cast<double>(r1->getResult());
+				double score2 = any_cast<double>(r2->getResult());
+				return score1 > score2;
 			});
 	}
 	void display() override {
