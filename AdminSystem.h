@@ -100,7 +100,6 @@ void viewUsers() {
 			<< " | " << setw(20) << usr->getType() << " |" << endl;
 		cout << string(47, '-') << endl;
 	}
-	WaitButton();
 	file.close();
 }
 
@@ -122,7 +121,6 @@ void viewAdmins() {
 			cout << string(47, '-') << endl;
 		}
 	}
-	WaitButton();
 	file.close();
 }
 
@@ -144,13 +142,6 @@ void viewJudges() {
 			cout << string(47, '-') << endl;
 		}
 	}
-	cout << "Нажмите любую кнопку, чтобы продолжить" << endl;
-	while (true) {
-		if (_kbhit()) {
-			while (_kbhit()) _getch();
-			break;
-		}
-	}
 	file.close();
 }
 
@@ -167,12 +158,15 @@ void view() {
 		{
 		case 1:
 			viewUsers();
+			WaitButton();
 			return;
 		case 2:
 			viewAdmins();
+			WaitButton();
 			return;
 		case 3:
 			viewJudges();
+			WaitButton();
 			return;
 		case 0:
 			return;

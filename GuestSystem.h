@@ -28,6 +28,7 @@ void viewCompetitions() {
 	temp.close();
 	cout << "Введите имя соревнования, которое необходимо вывести" << endl;
 	Input<string>::InputWithCheck(name);
+	system("cls");
 	filename_and_path = "Отчёты\\Отчёт соревнования " + name + ".txt";
 	ifstream file(filename_and_path);
 	if (!file) cout << "Ошибка чтения файла!" << endl;
