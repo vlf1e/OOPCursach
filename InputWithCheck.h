@@ -18,13 +18,15 @@ void WaitButton() {
 template <typename T>
 class Input {
 public:
-	static void InputWithCheck(T& obj) {
+	static bool InputWithCheck(T& obj) {
 		cin >> obj;
 		if (cin.fail()) {
 			cin.clear();
 			cin.ignore(10000000, '\n');
 			cout << "Ошибка ввода!" << endl;
 			WaitButton();
+			return false;
 		}
+		return true;
 	}
 };

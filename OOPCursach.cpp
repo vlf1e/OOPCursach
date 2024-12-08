@@ -67,14 +67,16 @@ void loginUser(vector<unique_ptr<User>>& users, const string& username) {
 					}
 				}
 				else {
-					system("cls");
-					cout << "Неверный пароль!";
+					password = "";
+					cout << endl << "Неверный пароль!" << endl;
 					WaitButton();
+					cout << endl;
 				}
 			}
 		}
 	}
-	cout << "Пользователь с таким логином не найден";
+	cout << "Пользователь с таким логином не найден" << endl;
+	WaitButton();
 }
 
 int main()
@@ -92,7 +94,7 @@ int main()
 	while (true) {
 		system("cls");
 		showProgramMenu();
-		Input<int>::InputWithCheck(choice);
+		if (!Input<int>::InputWithCheck(choice)) main();
 		switch (choice)
 		{
 		case 1:
@@ -100,7 +102,7 @@ int main()
 			system("cls");
 			string username;
 			cout << "Введите логин:" << endl;
-			Input<string>::InputWithCheck(username);
+			if (!Input<string>::InputWithCheck(username)) main();
 			loginUser(users, username);
 			break;
 		}

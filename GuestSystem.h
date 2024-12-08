@@ -27,7 +27,7 @@ void viewCompetitions() {
 	}
 	temp.close();
 	cout << "Введите имя соревнования, которое необходимо вывести" << endl;
-	Input<string>::InputWithCheck(name);
+	if (!Input<string>::InputWithCheck(name)) return;
 	system("cls");
 	filename_and_path = "Отчёты\\Отчёт соревнования " + name + ".txt";
 	ifstream file(filename_and_path);
@@ -41,7 +41,7 @@ void GuestSystem() {
 	int choice;
 	while (true) {
 		ShowGuestMenu();
-		Input<int>::InputWithCheck(choice);
+		if (!Input<int>::InputWithCheck(choice)) GuestSystem;
 		switch (choice)
 		{
 		case 1:

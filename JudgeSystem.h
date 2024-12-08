@@ -29,13 +29,13 @@ void addCompetition(vector<shared_ptr<Competition>>& competitions) {
 	string name;
 	system("cls");
 	cout << "Введите имя соревнования: ";
-	Input<string>::InputWithCheck(name);
+	if (!Input<string>::InputWithCheck(name)) return;
 	int type;
 	cout << "Выберите тип результата:" << endl;
 	cout << "1. Время" << endl;
 	cout << "2. Очки" << endl;
 	cout << "3. Текст" << endl;
-	Input<int>::InputWithCheck(type);
+	if (!Input<int>::InputWithCheck(type)) return;
 	shared_ptr<Competition> competition;
 	switch (type) {
 	case 1:
@@ -65,7 +65,7 @@ void addResult(vector<shared_ptr<Competition>>& competitions) {
 	}
 	string name;
 	cout << "Введите имя соревнования: ";
-	Input<string>::InputWithCheck(name);
+	if (!Input<string>::InputWithCheck(name)) return;
 	auto competitionIt = find_if(competitions.begin(), competitions.end(),
 		[&name](const shared_ptr<Competition>& comp) { return comp->getName() == name; });
 	if (competitionIt == competitions.end()) {
@@ -77,22 +77,22 @@ void addResult(vector<shared_ptr<Competition>>& competitions) {
 	string secondName, firstName, surname, country;
 	int age;
 	cout << "Введите фамилию: ";
-	Input<string>::InputWithCheck(secondName);
+	if (!Input<string>::InputWithCheck(secondName)) return;
 	cout << "Введите имя: ";
-	Input<string>::InputWithCheck(firstName);
+	if (!Input<string>::InputWithCheck(firstName)) return;
 	cout << "Введите отчество: ";
-	Input<string>::InputWithCheck(surname);
+	if (!Input<string>::InputWithCheck(surname)) return;
 	cout << "Введите страну: ";
-	Input<string>::InputWithCheck(country);
+	if (!Input<string>::InputWithCheck(country)) return;
 	cout << "Введите возраст: ";
-	Input<int>::InputWithCheck(age);
+	if (!Input<int>::InputWithCheck(age)) return;
 
 	Participant participant(secondName, firstName, surname, country, age);
 	if (typeid(**competitionIt) == typeid(TimeCompetition)) {
 		cout << "Введите время (Пример: минуты:секунды:миллисекунды): ";
 		Time time;
 		try {
-			Input<Time>::InputWithCheck(time);
+			if (!Input<Time>::InputWithCheck(time)) return;
 			auto result = make_shared<TimeResult>(participant, time);
 			(*competitionIt)->addParticipant(result);
 		}
@@ -105,7 +105,7 @@ void addResult(vector<shared_ptr<Competition>>& competitions) {
 	else if (typeid(**competitionIt) == typeid(ScoreCompetition)) {
 		cout << "Введите очки: ";
 		double score;
-		Input<double>::InputWithCheck(score);
+		if (!Input<double>::InputWithCheck(score)) return;
 		auto result = make_shared<ScoreResult>(participant, score);
 		(*competitionIt)->addParticipant(result);
 	}
@@ -154,7 +154,7 @@ void displayByName(const vector<shared_ptr<Competition>>& competitions) {
 	}
 	string name;
 	cout << "Введите имя соревнования, которое необходимо вывести: ";
-	Input<string>::InputWithCheck(name);
+	if (!Input<string>::InputWithCheck(name)) return;
 	for (const auto& comp : competitions) {
 		if (comp->getName() == name) {
 			if (typeid(*comp) != typeid(TextCompetition)) comp->sortParticipantsByScore();
@@ -262,7 +262,7 @@ void display(vector<shared_ptr<Competition>>& competitions) {
 	cout << "0. Вернутся назад" << endl;
 	cout << "Ваш выбор: " << endl;
 	while (true) {
-		Input<int>::InputWithCheck(choice);
+		if (!Input<int>::InputWithCheck(choice)) display(competitions);
 		switch (choice)
 		{
 		case 1:
@@ -298,7 +298,7 @@ void makeReport(vector<shared_ptr<Competition>>& competitions) {
 	}
 	string name;
 	cout << "Введите имя соревнования, для которого необходимо составить отчёт: ";
-	Input<string>::InputWithCheck(name);
+	if (!Input<string>::InputWithCheck(name)) return;
 	string filename_and_path = "Отчёты\\Отчёт соревнования " + name + ".txt";
 	ofstream file(filename_and_path);
 	for (const auto& comp : competitions) {
@@ -349,7 +349,7 @@ void JudgeSystem(const string& username) {
 	while (true) {
 		ShowMenu(username);
 		int choice;
-		Input<int>::InputWithCheck(choice);
+		if (!Input<int>::InputWithCheck(choice)) JudgeSystem(username);
 		switch (choice) {
 		case 1:
 			addCompetition(competitions);

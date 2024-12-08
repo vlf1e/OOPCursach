@@ -22,60 +22,70 @@ void showMenu(const string& username) {
 }
 
 void addUser() {
-	system("cls");
-	ofstream file("Users.txt", ios::app);
-	string login, password, type;
-	char ch;
-	int choice;
-	cout << "Введите логин: ";
-	Input<string>::InputWithCheck(login);
-	cout << "Введите пароль: ";
-	while ((ch = _getch()) != '\r') {
-		password.push_back(ch);
-		cout << '*';
+	try {
+		system("cls");
+		ofstream file("Users.txt", ios::app);
+		string login, password, type;
+		char ch;
+		int choice;
+		cout << "Введите логин: ";
+		if (!Input<string>::InputWithCheck(login)) return;
+		cout << "Введите пароль: ";
+		while ((ch = _getch()) != '\r') {
+			password.push_back(ch);
+			cout << '*';
+		}
+		cout << endl;
+		cout << "Выберите роль" << endl;
+		cout << "1. Администратор" << endl;
+		cout << "2. Судья" << endl;
+		if (!Input<int>::InputWithCheck(choice)) return;
+		switch (choice)
+		{
+		case 1:
+		{
+			type = "Администратор";
+			break;
+		}
+		case 2:
+		{
+			type = "Судья";
+			break;
+		}
+		default:
+			break;
+		}
+		if (file) {
+			User user(login, password, type);
+			file << user << endl;
+		}
+		file.close();
 	}
-	cout << endl;
-	cout << "Выберите роль" << endl;
-	cout << "1. Администратор" << endl;
-	cout << "2. Судья" << endl;
-	cout << "3. Гость" << endl;
-	Input<int>::InputWithCheck(choice);
-	switch (choice)
-	{
-	case 1:
-	{
-		type = "Администратор";
-		break;
+	catch (UserException& e) {
+		cout << e.what() << endl;
+		WaitButton();
+		return;
 	}
-	case 2:
-	{
-		type = "Судья";
-		break;
-	}
-	case 3:
-	{
-		type = "Гость";
-		break;
-	}
-	default:
-		break;
-	}
-	if (file) {
-		User user(login, password, type);
-		file << user << endl;
-	}
-	file.close();
 }
 
 void deleteUser(const string& username) {
 	ifstream file1("Users.txt");
 	vector<unique_ptr<User>> users;
 	User user;
+	bool find = false;
 	while (file1 >> user) {
 		users.push_back(make_unique<User>(user));
 	}
 	file1.close();
 	ofstream file2("Users.txt");
+	for (const auto& usr : users) {
+		if (usr->getLogin() == username) { find = true; break; }
+	}
+	if (!find) {
+		cout << "Пользователь с таким именем не найден!" << endl;
+		WaitButton();
+		return;
+	}
 	for (const auto& usr : users) {
 		if (usr->getLogin() == username) continue;
 		file2 << *usr << endl;
@@ -153,7 +163,7 @@ void view() {
 	cout << "3. Вывести судей" << endl;
 	cout << "0. Вернуться назад" << endl;
 	while (true) {
-		Input<int>::InputWithCheck(choice);
+		if (!Input<int>::InputWithCheck(choice)) return;
 		switch (choice)
 		{
 		case 1:
@@ -191,17 +201,17 @@ void editUser() {
 		if (usr->getLogin() == username) {
 			string login, password;
 			cout << "Введите имя пользователя" << endl;
-			Input<string>::InputWithCheck(login);
+			if (!Input<string>::InputWithCheck(login)) return;
 			usr->setLogin(login);
 			cout << "Введите новый пароль" << endl;
-			Input<string>::InputWithCheck(password);
+			if (!Input<string>::InputWithCheck(password)) return;
 			usr->setPassword(password);
 			cout << "Оставить тип учетной записи?" << endl;
 			cout << "1. Да" << endl;
 			cout << "2. Нет" << endl;
 			int choice2;
 			while (true) {
-				Input<int>::InputWithCheck(choice2);
+				if (!Input<int>::InputWithCheck(choice2)) return;
 				if (choice2 == 2) {
 					int choice3;
 					while (true) {
@@ -209,7 +219,7 @@ void editUser() {
 						cout << "1. Администратор" << endl;
 						cout << "2. " << endl;
 						cout << "Ваш выбор: ";
-						Input<int>::InputWithCheck(choice3);
+						if (!Input<int>::InputWithCheck(choice3)) return;
 						switch (choice3)
 						{
 						case 1: user.setType("Администратор"); break;
@@ -227,7 +237,7 @@ void AdminSystem(const string& username) {
 	int choice;
 	while (true) {
 		showMenu(username);
-		Input<int>::InputWithCheck(choice);
+		if (!Input<int>::InputWithCheck(choice)) AdminSystem(username);
 		switch (choice)
 		{
 		case 1:
@@ -239,7 +249,7 @@ void AdminSystem(const string& username) {
 			viewUsers();
 			string username;
 			cout << "Введите имя пользователя, которого вы хотите удалить" << endl;
-			Input<string>::InputWithCheck(username);
+			if (!Input<string>::InputWithCheck(username)) AdminSystem(username);
 			deleteUser(username);
 			break;
 		}
